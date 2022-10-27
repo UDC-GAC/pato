@@ -3,7 +3,7 @@
 [![compile and test gnu](https://github.com/amatria/pato/actions/workflows/compile-and-test-gnu.yml/badge.svg)](https://github.com/amatria/pato/actions/workflows/compile-and-test-gnu.yml)
 [![compile and test clang](https://github.com/amatria/pato/actions/workflows/compile-and-test-clang.yml/badge.svg)](https://github.com/amatria/pato/actions/workflows/compile-and-test-clang.yml)
 
-PATO: high PerformAnce TriplexatOr is a high performance tool for the fast and efficient detection of triple helices and triplex features in nucleotide sequences. PATO: high PerformAnce TriplexatOr, [Triplexator](https://github.com/Gurado/triplexator), and [TDF](https://github.com/CostaLab/reg-gen) are exact algorithms, and so PATO: high PerformAnce TriplexatOr functions as a drop in replacement to accelerate the triplex analyses in multicore computers and achieves the same level of prediction accuracy as that of the state of the art.
+PATO: high PerformAnce TriplexatOr is a high performance tool for the fast and efficient detection of triple helices and triplex features in nucleotide sequences. PATO: high PerformAnce TriplexatOr is a more accurate and modern alternative to [Triplexator](https://github.com/Gurado/triplexator) and [TDF](https://github.com/CostaLab/reg-gen) and functions as a drop in replacement to accelerate the triplex analyses in multicore computers.
 
 ## Version
 Version v0.0.0.
