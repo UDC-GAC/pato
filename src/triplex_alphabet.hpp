@@ -35,6 +35,8 @@
 #ifndef TRIPLEX_ALPHABET_HPP
 #define TRIPLEX_ALPHABET_HPP
 
+#include <functional>
+
 #include <seqan/basic.h>
 #include <seqan/modifier.h>
 #include <seqan/sequence.h>
@@ -168,252 +170,6 @@ template <typename T>
 	8,   8,   8,   8,   8,   8,   8,   8,   8,   8,   8,   8,   8,   8,   8,   8  //15
 };
 
-template <typename T = void>
-struct TranslateTableDnaRY2Ascii_
-{
-	static char const VALUE[3];
-};
-template <typename T>
-	char const TranslateTableDnaRY2Ascii_<T>::VALUE[3] = {'R', 'Y', 'N'};
-
-template <typename T = void>
-struct TranslateTableDna2DnaRY_
-{
-	static char const VALUE[4];
-};
-template <typename T>
-	char const TranslateTableDna2DnaRY_<T>::VALUE[4] =
-{
-	'0', //'A'
-	'1', //'C'
-	'0', //'G'
-	'1'  //'T'
-};
-
-template <typename T = void>
-struct TranslateTableDna52DnaRY_
-{
-	static char const VALUE[5];
-};
-template <typename T>
-	char const TranslateTableDna52DnaRY_<T>::VALUE[5] =
-{
-	'0', //'A'
-	'1', //'C'
-	'0', //'G'
-	'1', //'T'
-	'2'  //'N'
-};
-
-template <typename T = void>
-struct TranslateTableIupac2DnaRY_
-{
-	static char const VALUE[16];
-};
-template <typename T>
-	char const TranslateTableIupac2DnaRY_<T>::VALUE[16] =
-{
-	1, //'U'
-	1, //'T'
-	0, //'A'
-	2, //'W' = TA
-	1, //'C'
-	1, //'Y' = TC
-	2, //'M' = AC
-	2, //'H' = not-G
-	0, //'G'
-	2, //'K' = TG
-	0, //'R' = AG
-	2, //'D' = not-C
-	2, //'S' = CG
-	2, //'B' = non-A
-	2, //'V' = non-T
-	2  //'N' = any
-};
-
-template <typename T = void>
-struct TranslateTableAscii2DnaRY_
-{
-	static char const VALUE[256];
-};
-template <typename T>
-	char const TranslateTableAscii2DnaRY_<T>::VALUE[256] =
-{
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //0
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //1
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //2
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //3
-
-	2,   0,   2,   1,   2,   2,   2,   0,   2,   2,   2,   2,   2,   2,   2,   2, //4
-//	 ,   A,   B,   C,   D,   E,   D,   G,   H,   I,   J,   K,   L,   M,   N,   O,
-
-	2,   2,   0,   2,   1,   1,   2,   2,   2,   1,   2,   2,   2,   2,   2,   2, //5
-//	P,   Q,   R,   S,   T,   U,   V,   W,   X,   Y,   Z,    ,    ,    ,    ,
-
-	2,   0,   2,   1,   2,   2,   2,   0,   2,   2,   2,   2,   2,   2,   2,   2, //6
-//   ,   a,   b,   c,   d,   e,   f,   g,   h,   i,   j,   k,   l,   m,   n,   o,
-
-	2,   2,   0,   2,   1,   1,   2,   2,   2,   1,   2,   2,   2,   2,   2,   2, //7
-//  p,   q,   r,   s,   t,   u,   v,   w,   x,   y,   z,    ,    ,    ,    ,
-
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //8
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //9
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //10
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //11
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //12
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //13
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //14
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2  //15
-};
-
-template <typename T = void>
-struct TranslateTableByte2DnaRY_
-{
-	static char const VALUE[256];
-};
-template <typename T>
-	char const TranslateTableByte2DnaRY_<T>::VALUE[256] = {
-	0,   1,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //0
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //1
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //2
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //3
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //4
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //5
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //6
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //7
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //8
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //9
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //10
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //11
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //12
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //13
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //14
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   4  //15
-};
-
-template <typename T = void>
-struct TranslateTableDnaKM2Ascii_
-{
-	static char const VALUE[3];
-};
-template <typename T>
-	char const TranslateTableDnaKM2Ascii_<T>::VALUE[3] = {'K', 'M', 'N'};
-
-template <typename T = void>
-struct TranslateTableDna2DnaKM_
-{
-	static char const VALUE[4];
-};
-template <typename T>
-	char const TranslateTableDna2DnaKM_<T>::VALUE[4] =
-{
-	'1', //'A'
-	'1', //'C'
-	'0', //'G'
-	'0'  //'T'
-};
-
-template <typename T = void>
-struct TranslateTableDna52DnaKM_
-{
-	static char const VALUE[5];
-};
-template <typename T>
-	char const TranslateTableDna52DnaKM_<T>::VALUE[5] =
-{
-	'1', //'A'
-	'1', //'C'
-	'0', //'G'
-	'0', //'T'
-	'2'  //'N'
-};
-
-template <typename T = void>
-struct TranslateTableIupac2DnaKM_
-{
-	static char const VALUE[16];
-};
-template <typename T>
-	char const TranslateTableIupac2DnaKM_<T>::VALUE[16] =
-{
-	0, //'U'
-	0, //'T'
-	1, //'A'
-	2, //'W' = TA
-	1, //'C'
-	2, //'Y' = TC
-	1, //'M' = AC
-	2, //'H' = not-G
-	0, //'G'
-	0, //'K' = TG
-	2, //'R' = AG
-	2, //'D' = not-C
-	2, //'S' = CG
-	2, //'B' = non-A
-	2, //'V' = non-T
-	2  //'N' = any
-};
-
-template <typename T = void>
-struct TranslateTableAscii2DnaKM_
-{
-	static char const VALUE[256];
-};
-template <typename T>
-	char const TranslateTableAscii2DnaKM_<T>::VALUE[256] =
-{
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //0
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //1
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //2
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //3
-
-	2,   1,   2,   1,   2,   2,   2,   0,   2,   2,   2,   0,   2,   1,   2,   2, //4
-//	 ,   A,   B,   C,   D,   E,   D,   G,   H,   I,   J,   K,   L,   M,   N,   O,
-
-	2,   2,   2,   2,   0,   0,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //5
-//	P,   Q,   R,   S,   T,   U,   V,   W,   X,   Y,   Z,    ,    ,    ,    ,
-
-	2,   1,   2,   1,   2,   2,   2,   0,   2,   2,   2,   0,   2,   1,   2,   2, //6
-//   ,   a,   b,   c,   d,   e,   f,   g,   h,   i,   j,   k,   l,   m,   n,   o,
-
-	2,   2,   2,   2,   0,   0,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //7
-//  p,   q,   r,   s,   t,   u,   v,   w,   x,   y,   z,    ,    ,    ,    ,
-
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //8
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //9
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //10
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //11
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //12
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //13
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //14
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2  //15
-};
-
-template <typename T = void>
-struct TranslateTableByte2DnaKM_
-{
-	static char const VALUE[256];
-};
-template <typename T>
-	char const TranslateTableByte2DnaKM_<T>::VALUE[256] = {
-	0,   1,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //0
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //1
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //2
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //3
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //4
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //5
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //6
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //7
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //8
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //9
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //10
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //11
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //12
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //13
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2, //14
-	2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   4  //15
-};
-
 struct Triplex_ {};
 typedef SimpleType<unsigned char, Triplex_> Triplex;
 
@@ -426,46 +182,10 @@ template <> struct BitsPerValue< Triplex > {
     static const Type VALUE = 4;
 };
 
-struct DnaRY_ {};
-typedef SimpleType<unsigned char, DnaRY_> DnaRY;
-
-template <> struct ValueSize< DnaRY > { 
-	typedef uint8_t Type;
-	static const Type VALUE = 3;
-};
-template <> struct BitsPerValue< DnaRY > { 
-	typedef uint8_t Type;
-    static const Type VALUE = 2;
-};
-
-struct DnaKM_ {};
-typedef SimpleType<unsigned char, DnaKM_> DnaKM;
-
-template <> struct ValueSize< DnaKM > { 
-	typedef uint8_t Type;
-	static const Type VALUE = 3;
-};
-template <> struct BitsPerValue< DnaKM > { 
-	typedef uint8_t Type;
-    static const Type VALUE = 2;
-};
-
 inline void assign(Ascii & c_target,
 				   Triplex const & source)
 {
 	c_target = TranslateTableTriplex2Ascii_<>::VALUE[source.value];
-}
-
-inline void assign(Ascii & c_target,
-				   DnaRY const & source)
-{
-	c_target = TranslateTableDnaRY2Ascii_<>::VALUE[source.value];
-}
-
-inline void assign(Ascii & c_target,
-				   DnaKM const & source)
-{
-	c_target = TranslateTableDnaKM2Ascii_<>::VALUE[source.value];
 }
 
 template <>
@@ -510,90 +230,6 @@ inline void assign(Triplex & target, Iupac const & source)
 	target.value = TranslateTableIupac2Triplex_<>::VALUE[source.value];
 }
 
-template <>
-struct CompareType<DnaRY, uint8_t> { typedef DnaRY Type; };
-inline void assign(DnaRY & target, uint8_t c_source)
-{
-	target.value = TranslateTableByte2DnaRY_<>::VALUE[c_source];
-}
-
-template <>
-struct CompareType<DnaRY, Ascii> { typedef DnaRY Type; };
-inline void assign(DnaRY & target, Ascii c_source)
-{
-	target.value = TranslateTableAscii2DnaRY_<>::VALUE[(unsigned char)c_source];
-}
-
-template <>
-struct CompareType<DnaRY, Unicode> { typedef DnaRY Type; };
-inline void assign(DnaRY & target, Unicode c_source)
-{
-	target.value = TranslateTableAscii2DnaRY_<>::VALUE[(unsigned char) c_source];
-}
-
-template <>
-struct CompareType<DnaRY, Dna> { typedef DnaRY Type; };
-inline void assign(DnaRY & target, Dna const & c_source)
-{
-	target.value = TranslateTableDna2DnaRY_<>::VALUE[(unsigned char) c_source];
-}
-
-template <>
-struct CompareType<DnaRY, Dna5> { typedef DnaRY Type; };
-inline void assign(DnaRY & target, Dna5 const & c_source)
-{
-	target.value = TranslateTableDna52DnaRY_<>::VALUE[(unsigned char) c_source];
-}
-
-template <>
-struct CompareType<DnaRY, Iupac> { typedef DnaRY Type; };
-inline void assign(DnaRY & target, Iupac const & source)
-{
-	target.value = TranslateTableIupac2DnaRY_<>::VALUE[source.value];
-}
-
-template <>
-struct CompareType<DnaKM, uint8_t> { typedef DnaKM Type; };
-inline void assign(DnaKM & target, uint8_t c_source)
-{
-	target.value = TranslateTableByte2DnaKM_<>::VALUE[c_source];
-}
-
-template <>
-struct CompareType<DnaKM, Ascii> { typedef DnaKM Type; };
-inline void assign(DnaKM & target, Ascii c_source)
-{
-	target.value = TranslateTableAscii2DnaKM_<>::VALUE[(unsigned char)c_source];
-}
-
-template <>
-struct CompareType<DnaKM, Unicode> { typedef DnaKM Type; };
-inline void assign(DnaKM & target, Unicode c_source)
-{
-	target.value = TranslateTableAscii2DnaKM_<>::VALUE[(unsigned char) c_source];
-}
-
-template <>
-struct CompareType<DnaKM, Dna> { typedef DnaKM Type; };
-inline void assign(DnaKM & target, Dna const & c_source)
-{
-	target.value = TranslateTableDna2DnaKM_<>::VALUE[(unsigned char) c_source];
-}
-
-template <>
-struct CompareType<DnaKM, Dna5> { typedef DnaKM Type; };
-inline void assign(DnaKM & target, Dna5 const & c_source)
-{
-	target.value = TranslateTableDna52DnaKM_<>::VALUE[(unsigned char) c_source];
-}
-
-template <>
-struct CompareType<DnaKM, Iupac> { typedef DnaKM Type; };
-inline void assign(DnaKM & target, Iupac const & source)
-{
-	target.value = TranslateTableIupac2DnaKM_<>::VALUE[source.value];
-}
-
 template <typename T = void>
 struct TranslateTableTriplex2TriplexComplement_
 {
@@ -601,22 +237,6 @@ struct TranslateTableTriplex2TriplexComplement_
 };
 template <typename T>
 	char const TranslateTableTriplex2TriplexComplement_<T>::VALUE[9] = {'T', 'G', 'C', 'A', 'Y', 'R', 'M', 'K'};
-
-template <typename T = void>
-struct TranslateTableDnaRY2DnaRYComplement_
-{
-	static char const VALUE[3];
-};
-template <typename T>
-	char const TranslateTableDnaRY2DnaRYComplement_<T>::VALUE[3] = {'Y', 'R', 'N'};
-
-template <typename T = void>
-struct TranslateTableDnaKM2DnaKMComplement_
-{
-	static char const VALUE[3];
-};
-template <typename T>
-	char const TranslateTableDnaKM2DnaKMComplement_<T>::VALUE[3] = {'M', 'K', 'N'};
 
 inline bool isMatch(Triplex val1, Triplex val2)
 {
@@ -627,7 +247,7 @@ inline bool isMatch(Triplex val1, Triplex val2)
 	else 
 		return false;
 }
-	
+
 template <typename TAlphabet>
 inline bool isMatch(TAlphabet val1, TAlphabet val2)
 {
@@ -642,64 +262,22 @@ inline bool _repeatMaskValue(Triplex const &val)
 	return val == unknownValue<Triplex>(); // 'N'
 }
 
-inline bool _repeatMaskValue(DnaRY const &val)
-{
-	return val == unknownValue<DnaRY>(); // 'N'
-}
-
-inline bool _repeatMaskValue(DnaKM const &val)
-{
-	return val == unknownValue<DnaKM>(); // 'N'
-}
-
 typedef String<Triplex, Alloc<void> > TriplexString;
-typedef String<DnaRY, Alloc<void> > DnaRYString;
-typedef String<DnaKM, Alloc<void> > DnaKMString;
 
 typedef ModView< FunctorComplement<Triplex> >	ModComplementTriplex;
-typedef ModView< FunctorComplement<DnaRY> >	ModComplementDnaRY;
-typedef ModView< FunctorComplement<DnaKM> >	ModComplementDnaKM;
 
 typedef ModifiedString<TriplexString, ModView< FunctorComplement<Triplex> > >		TriplexStringComplement;
-typedef ModifiedString<DnaRYString, ModView< FunctorComplement<DnaRY> > >		DnaRYStringComplement;
-typedef ModifiedString<DnaKMString, ModView< FunctorComplement<DnaKM> > >		DnaKMStringComplement;
 
 typedef ModifiedString<
 			ModifiedString<	TriplexString, ModView< FunctorComplement<Triplex> > >,
 			ModReverse
 		>	TriplexStringReverseComplement;
 
-typedef ModifiedString<
-			ModifiedString<	DnaRYString, ModView< FunctorComplement<DnaRY> > >,
-			ModReverse
-		>	DnaRYStringReverseComplement;
-
-typedef ModifiedString<
-			ModifiedString<	DnaKMString, ModView< FunctorComplement<DnaKM> > >,
-			ModReverse
-		>	DnaKMStringReverseComplement;
-
 template <>
-struct FunctorComplement<Triplex> : public ::std::unary_function<Triplex,Triplex>
+struct FunctorComplement<Triplex> : std::function<Triplex(Triplex)>
 {
-    inline Triplex operator()(Triplex x) const {
+	inline Triplex operator()(Triplex x) const {
 		return TranslateTableTriplex2TriplexComplement_<>::VALUE[x.value];
-	}
-};
-
-template <>
-struct FunctorComplement<DnaRY> : public ::std::unary_function<DnaRY,DnaRY>
-{
-    inline DnaRY operator()(DnaRY x) const {
-		return TranslateTableDnaRY2DnaRYComplement_<>::VALUE[x.value];
-	}
-};
-
-template <>
-struct FunctorComplement<DnaKM> : public ::std::unary_function<DnaKM,DnaKM>
-{
-    inline DnaKM operator()(DnaKM x) const {
-		return TranslateTableDnaKM2DnaKMComplement_<>::VALUE[x.value];
 	}
 };
 

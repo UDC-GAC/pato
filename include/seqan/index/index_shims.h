@@ -36,6 +36,8 @@
 #ifndef SEQAN_HEADER_INDEX_SHIMS_H
 #define SEQAN_HEADER_INDEX_SHIMS_H
 
+#include <functional>
+
 namespace seqan
 {
 
@@ -553,7 +555,7 @@ namespace seqan
 
     template <typename T1, typename T2, typename TPack>
     struct SAValueLess_< Pair<T1,T2,TPack> >:
-        public std::binary_function< Pair<T1,T2,TPack>, Pair<T1,T2,TPack>, bool>
+        std::function<bool(Pair<T1,T2,TPack>,Pair<T1,T2,TPack>)>
     {
         inline bool operator()(Pair<T1,T2,TPack> const &a, Pair<T1,T2,TPack> const &b) const {
             return    (getValueI1(a) < getValueI1(b)) ||

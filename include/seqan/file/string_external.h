@@ -37,6 +37,8 @@
 #ifndef SEQAN_HEADER_STRING_EXTERNAL_H
 #define SEQAN_HEADER_STRING_EXTERNAL_H
 
+#include <functional>
+
 /* IOREV
  * _nottested_
  * _doc_
@@ -1335,7 +1337,7 @@ namespace seqan
             pf.pageNo = -1;                                 // cut back link
         }
 
-        struct testIODone : public std::unary_function<TPageFrame&,bool>
+        struct testIODone : std::function<bool(TPageFrame&)>
         {
             String &me;
             testIODone(String &_me): me(_me) {}

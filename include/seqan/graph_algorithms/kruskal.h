@@ -37,6 +37,8 @@
 #ifndef INCLUDE_SEQAN_GRAPH_ALGORITHMS_KRUSKAL_H_
 #define INCLUDE_SEQAN_GRAPH_ALGORITHMS_KRUSKAL_H_
 
+#include <functional>
+
 namespace seqan {
 
 // ============================================================================
@@ -60,7 +62,7 @@ namespace seqan {
 // ----------------------------------------------------------------------------
 
 template <typename TWeight, typename TPair>
-struct LessPairI1_ : public std::unary_function<Pair<TWeight, TPair>, bool>
+struct LessPairI1_ : std::function<bool(Pair<TWeight, TPair>,Pair<TWeight, TPair>)>
 {
     bool operator() (Pair<TWeight, TPair> const & a1,
                      Pair<TWeight, TPair> const & a2) const

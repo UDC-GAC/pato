@@ -35,6 +35,8 @@
 #ifndef SEQAN_HEADER_POOL_MAPPER_H
 #define SEQAN_HEADER_POOL_MAPPER_H
 
+#include <functional>
+
 namespace seqan
 {
 
@@ -348,7 +350,7 @@ namespace seqan
             cancel();
         }
 
-        struct insertBucket : public std::unary_function<TPageBucket,void>
+        struct insertBucket : std::function<void(TPageBucket)>
         {
             Handler &me;
             insertBucket(Handler &_me): me(_me) {}
@@ -454,7 +456,7 @@ namespace seqan
             cancel();
         }
 
-        struct insertBucket : public std::unary_function<TPageBucket,void>
+        struct insertBucket : std::function<void(TPageBucket)>
         {
             Handler &me;
             insertBucket(Handler &_me): me(_me) {}

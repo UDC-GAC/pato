@@ -38,6 +38,8 @@
 #ifndef SEQAN_SEQ_IO_FASTA_FASTQ_H_
 #define SEQAN_SEQ_IO_FASTA_FASTQ_H_
 
+#include <functional>
+
 namespace seqan {
 
 // ============================================================================
@@ -218,7 +220,7 @@ struct SequenceOutputOptions
 // ----------------------------------------------------------------------------
 
 template <typename TValue>
-struct QualityExtractor : public std::unary_function<TValue, char>
+struct QualityExtractor : std::function<char(TValue)>
 {
     inline char operator()(TValue const & x) const
     {

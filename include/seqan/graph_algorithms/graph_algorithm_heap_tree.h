@@ -35,6 +35,8 @@
 #ifndef SEQAN_HEADER_GRAPH_ALGORITHM_HEAP_TREE_H
 #define SEQAN_HEADER_GRAPH_ALGORITHM_HEAP_TREE_H
 
+#include <functional>
+
 namespace seqan
 {
 
@@ -321,8 +323,7 @@ heapSort(TITBegin itBeg,
 //////////////////////////////////////////////////////////////////////////////
 
 template<typename TKey, typename TValue, typename TPredicate>
-struct LessPairI2WithFunctor :
-    public std::unary_function<Pair<TKey, TValue>, bool>
+struct LessPairI2WithFunctor : std::function<bool(Pair<TKey, TValue>,Pair<TKey, TValue>)>
 {
     inline bool
     operator() (Pair<TKey, TValue> const& a1, Pair<TKey, TValue> const& a2) {

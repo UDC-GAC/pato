@@ -35,6 +35,8 @@
 #ifndef SEQAN_HEADER_STORE_ALIGN_H
 #define SEQAN_HEADER_STORE_ALIGN_H
 
+#include <functional>
+
 namespace seqan
 {
 
@@ -349,7 +351,7 @@ struct _LessAlignedRead;
 
 template <typename TAlignedRead>
 struct _LessAlignedRead<TAlignedRead, SortId> :
-    public std::binary_function<TAlignedRead, TAlignedRead, bool>
+    std::function<bool(TAlignedRead,TAlignedRead)>
 {
     inline bool
     operator() (TAlignedRead const& a1, TAlignedRead const& a2) const {
@@ -359,7 +361,7 @@ struct _LessAlignedRead<TAlignedRead, SortId> :
 
 template <typename TAlignedRead>
 struct _LessAlignedRead<TAlignedRead, SortContigId> :
-    public std::binary_function<TAlignedRead, TAlignedRead, bool>
+    std::function<bool(TAlignedRead,TAlignedRead)>
 {
     inline bool
     operator() (TAlignedRead const& a1, TAlignedRead const& a2) const {
@@ -369,7 +371,7 @@ struct _LessAlignedRead<TAlignedRead, SortContigId> :
 
 template <typename TAlignedRead>
 struct _LessAlignedRead<TAlignedRead, SortBeginPos> :
-    public std::binary_function<TAlignedRead, TAlignedRead, bool>
+    std::function<bool(TAlignedRead,TAlignedRead)>
 {
     inline bool
     operator() (TAlignedRead const& a1, TAlignedRead const& a2) const {
@@ -379,7 +381,7 @@ struct _LessAlignedRead<TAlignedRead, SortBeginPos> :
 
 template <typename TAlignedRead>
 struct _LessAlignedRead<TAlignedRead, SortEndPos> :
-    public std::binary_function<TAlignedRead, TAlignedRead, bool>
+    std::function<bool(TAlignedRead,TAlignedRead)>
 {
     inline bool
     operator() (TAlignedRead const& a1, TAlignedRead const& a2) const {
@@ -389,7 +391,7 @@ struct _LessAlignedRead<TAlignedRead, SortEndPos> :
 
 template <typename TAlignedRead>
 struct _LessAlignedRead<TAlignedRead, SortPairMatchId> :
-    public std::binary_function<TAlignedRead, TAlignedRead, bool>
+    std::function<bool(TAlignedRead,TAlignedRead)>
 {
     inline bool
     operator() (TAlignedRead const& a1, TAlignedRead const& a2) const {
@@ -399,7 +401,7 @@ struct _LessAlignedRead<TAlignedRead, SortPairMatchId> :
 
 template <typename TAlignedRead>
 struct _LessAlignedRead<TAlignedRead, SortReadId> :
-    public std::binary_function<TAlignedRead, TAlignedRead, bool>
+    std::function<bool(TAlignedRead,TAlignedRead)>
 {
     inline bool
     operator() (TAlignedRead const& a1, TAlignedRead const& a2) const {

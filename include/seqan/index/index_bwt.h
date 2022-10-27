@@ -35,6 +35,8 @@
 #ifndef SEQAN_HEADER_INDEX_BWT_H
 #define SEQAN_HEADER_INDEX_BWT_H
 
+#include <functional>
+
 namespace seqan
 {
 
@@ -141,7 +143,7 @@ namespace seqan
     };
 
     template <typename InType, typename TLimitsString, typename Result = typename Value<TLimitsString>::Type>
-    struct _filterGlobalizer : public std::unary_function<InType,Result> {
+    struct _filterGlobalizer : std::function<Result(InType)> {
         TLimitsString const &limits;
         _filterGlobalizer(TLimitsString const &_limits) : limits(_limits) {}
         inline Result operator()(const InType& x) const

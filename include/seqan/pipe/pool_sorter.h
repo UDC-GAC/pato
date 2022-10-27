@@ -35,13 +35,13 @@
 #ifndef SEQAN_HEADER_POOL_SORTER_H
 #define SEQAN_HEADER_POOL_SORTER_H
 
+#include <functional>
+
 namespace seqan
 {
 
     template < typename TValue, typename Compare >
-    struct MergeStreamComparer : public std::binary_function < PageBucket<TValue>,
-                                                               PageBucket<TValue>,
-                                                               bool>
+    struct MergeStreamComparer : std::function<bool(PageBucket<TValue>,PageBucket<TValue>)>
     {
         Compare C;
         MergeStreamComparer(Compare &tmpC): C(tmpC) { }
@@ -54,10 +54,7 @@ namespace seqan
 
     template < typename TCompare >
     struct AdaptorCompare2Less :
-        public std::binary_function <
-            typename TCompare::first_argument_type,
-            typename TCompare::second_argument_type,
-            bool >
+        std::function<bool(typename TCompare::first_argument_type,typename TCompare::second_argument_type)>
     {
         TCompare const & C;
         AdaptorCompare2Less(TCompare const & tmpC): C(tmpC) { }
@@ -203,7 +200,7 @@ namespace seqan
             cancel();
         }
 
-        struct insertBucket : public std::unary_function<TPageBucket,void>
+        struct insertBucket : std::function<void(TPageBucket)>
         {
             Handler &me;
             insertBucket(Handler &_me): me(_me) {}
@@ -318,7 +315,7 @@ namespace seqan
             cancel();
         }
 
-        struct insertBucket : public std::unary_function<TPageBucket, void> {
+        struct insertBucket : std::function<void(TPageBucket)> {
             BufferHandler &me;
             insertBucket(BufferHandler &_me): me(_me) {}
 

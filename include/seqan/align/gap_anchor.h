@@ -35,6 +35,8 @@
 #ifndef SEQAN_INCLUDE_SEQAN_ALIGN_GAP_ANCHOR_H_
 #define SEQAN_INCLUDE_SEQAN_ALIGN_GAP_ANCHOR_H_
 
+#include <functional>
+
 namespace seqan {
 
 // ============================================================================
@@ -221,7 +223,7 @@ struct _LessGapAnchor;
 
 template <typename TGapAnchor>
 struct _LessGapAnchor<TGapAnchor, SortSeqPos> :
-    public std::binary_function<TGapAnchor, TGapAnchor, bool>
+    std::function<bool(TGapAnchor,TGapAnchor)>
 {
     inline bool
     operator() (TGapAnchor const& a1, TGapAnchor const& a2) const {
@@ -231,7 +233,7 @@ struct _LessGapAnchor<TGapAnchor, SortSeqPos> :
 
 template <typename TGapAnchor>
 struct _LessGapAnchor<TGapAnchor, SortGapPos> :
-    public std::binary_function<TGapAnchor, TGapAnchor, bool>
+    std::function<bool(TGapAnchor,TGapAnchor)>
 {
     inline bool
     operator() (TGapAnchor const& a1, TGapAnchor const& a2) const {

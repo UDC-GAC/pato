@@ -35,6 +35,8 @@
 #ifndef SEQAN_HEADER_INDEX_SA_QSORT_H
 #define SEQAN_HEADER_INDEX_SA_QSORT_H
 
+#include <functional>
+
 namespace seqan
 {
 
@@ -43,7 +45,7 @@ namespace seqan
     // compare two suffices of a given text
     template < typename TSAValue, typename TText >
     struct SuffixLess_ :
-        public std::binary_function < TSAValue, TSAValue, bool >
+        std::function<bool(TSAValue, TSAValue)>
     {
         typedef typename Iterator<TText const, Standard>::Type TIter;
         TIter _begin, _end;
@@ -82,7 +84,7 @@ namespace seqan
     // compare two suffices of a given text
     template < typename TSAValue, typename TString, typename TSetSpec >
     struct SuffixLess_<TSAValue, StringSet<TString, TSetSpec> const > :
-        public std::binary_function < TSAValue, TSAValue, bool >
+        std::function<bool(TSAValue, TSAValue)>
     {
         typedef StringSet<TString, TSetSpec> const TText;
 

@@ -35,6 +35,8 @@
 #ifndef SEQAN_HEADER_PIPE_FILTER_H
 #define SEQAN_HEADER_PIPE_FILTER_H
 
+#include <functional>
+
 namespace seqan
 {
 
@@ -42,7 +44,7 @@ namespace seqan
 //{
 
     template <typename TValue, typename TResult = typename Value<TValue, 1>::Type>
-    struct filterI1 : public std::unary_function<TValue, TResult>
+    struct filterI1 : std::function<TResult(TValue)>
     {
         inline TResult operator() (const TValue & x) const
         {
@@ -51,7 +53,7 @@ namespace seqan
     };
 
     template <typename TValue, typename TResult = typename Value<TValue, 2>::Type>
-    struct filterI2 : public std::unary_function<TValue, TResult>
+    struct filterI2 : std::function<TResult(TValue)>
     {
         inline TResult operator() (const TValue & x) const
         {
@@ -60,7 +62,7 @@ namespace seqan
     };
 
     template <typename TValue, typename TResult = typename Value<TValue, 3>::Type>
-    struct filterI3 : public std::unary_function<TValue, TResult>
+    struct filterI3 : std::function<TResult(TValue)>
     {
         inline TResult operator() (const TValue & x) const
         {

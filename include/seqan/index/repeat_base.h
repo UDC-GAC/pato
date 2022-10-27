@@ -35,6 +35,8 @@
 #ifndef SEQAN_HEADER_REPEAT_BASE_H
 #define SEQAN_HEADER_REPEAT_BASE_H
 
+#include <functional>
+
 #if SEQAN_ENABLE_PARALLELISM
 #include <seqan/parallel.h>
 #endif  // #if SEQAN_ENABLE_PARALLELISM
@@ -117,7 +119,7 @@ namespace seqan {
     }
 
     template <typename TPos>
-    struct RepeatLess_ : public std::binary_function<TPos, TPos, bool>
+    struct RepeatLess_ : std::function<bool(TPos,TPos)>
     {
         // key less
         inline bool operator() (TPos const &a, TPos const &b) const {

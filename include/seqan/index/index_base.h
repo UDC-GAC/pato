@@ -36,6 +36,8 @@
 #ifndef SEQAN_HEADER_INDEX_BASE_H
 #define SEQAN_HEADER_INDEX_BASE_H
 
+#include <functional>
+
 //#define SEQAN_TEST_INDEX
 
 namespace seqan
@@ -337,7 +339,7 @@ template <
     };
 
     // less function to search in sorted list for fibre id
-    struct FibreLess: public std::binary_function<FibreRecord, unsigned, bool>
+    struct FibreLess: std::function<bool(FibreRecord,unsigned)>
     {    // functor for operator>
         inline bool operator()(FibreRecord const & _Left, unsigned const Right_) const
         {    // apply operator> to operands
@@ -643,7 +645,7 @@ template <
 // globalize functor
 
     template <typename InType, typename TLimitsString, typename Result = typename Value<TLimitsString>::Type>
-    struct FunctorGlobalize : public std::unary_function<InType,Result>
+    struct FunctorGlobalize : std::function<Result(InType)>
     {
         TLimitsString const * limits;
 
@@ -657,7 +659,7 @@ template <
     };
 
     template <typename InType, typename Result>
-    struct FunctorGlobalize<InType, Nothing, Result> : public std::unary_function<InType,InType>
+    struct FunctorGlobalize<InType, Nothing, Result> : std::function<InType(InType)>
     {
         FunctorGlobalize() {}
         FunctorGlobalize(Nothing const &) {}
