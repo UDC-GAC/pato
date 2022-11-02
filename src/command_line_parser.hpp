@@ -68,9 +68,9 @@ bool parse_command_line(options& opts, int argc, char *argv[])
 
     seqan::setShortDescription(parser, "high PerformAnce TriplexatOr");
     seqan::addUsageLine(parser, "[options] {-ss tfo_file | -ds tts_file | -ss tfo_file -ds tts_file}");
-    seqan::addDescription(parser, "PATO is a high performance tool for the fast and efficient detection of triple helices and triplex features in nucleotide sequences. PATO is a more accurate and modern altenative to Triplexator and TDF and functions as a drop in replacement to accelerate the triplex analyses in multicore computers.");
+    seqan::addDescription(parser, "PATO is a high performance tool for the fast and efficient detection of triple helices and triplex features in nucleotide sequences. PATO is a modern altenative to Triplexator and TDF and functions as a drop in replacement to accelerate the triplex analyses in multicore computers. Moreover, PATO's efficiency allows a more exhaustive search of the triplex-forming solution space, and so PATO achieves higher levels of prediction accuracy in far less time than other tools in the state of the art.");
 
-    seqan::setDate(parser, "October 2022");
+    seqan::setDate(parser, "November 2022");
     seqan::setVersion(parser, "v0.0.0");
     seqan::setUrl(parser, "https://github.com/amatria/pato");
     seqan::setShortCopyright(parser, "2022 Iñaki Amatria-Barral.");
