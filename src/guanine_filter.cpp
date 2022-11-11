@@ -57,7 +57,7 @@ bool is_interrupt_char(char_set_set_t& encoded_seq, unsigned int pos)
 
 bool motif_specific_constraint(double filter_rate,
                                orientation_t ornt,
-                               const mixed_motif_t& tag,
+                               __attribute__((unused)) const mixed_motif_t& tag,
                                const options& opts)
 {
     if (ornt != orientation_t::parallel
@@ -75,7 +75,7 @@ void add_match(motif_set_t& motifs,
                unsigned int start,
                unsigned int end,
                unsigned int errors,
-               const tfo_t& tag)
+               __attribute__((unused)) const tfo_t& tag)
 {
     auto motif_length = seqan::length(motif);
     auto st = seqan::isParallel(motif) ? start : motif_length - end;
@@ -98,7 +98,7 @@ void add_match(motif_set_t& motifs,
                unsigned int start,
                unsigned int end,
                unsigned int errors,
-               const mixed_motif_t& tag)
+               __attribute__((unused)) const mixed_motif_t& tag)
 {
     add_match(motifs, motif, start, end, errors, tfo_t());
 }
@@ -108,7 +108,7 @@ void add_match(motif_set_t& motifs,
                unsigned int start,
                unsigned int end,
                unsigned int errors,
-               const purine_motif_t& tag)
+               __attribute__((unused)) const purine_motif_t& tag)
 {
     add_match(motifs, motif, start, end, errors, tfo_t());
 }
@@ -118,7 +118,7 @@ void add_match(motif_set_t& motifs,
                unsigned int start,
                unsigned int end,
                unsigned int errors,
-               const pyrimidine_motif_t& tag)
+               __attribute__((unused)) const pyrimidine_motif_t& tag)
 {
     add_match(motifs, motif, start, end, errors, tfo_t());
 }
@@ -128,7 +128,7 @@ void add_match(motif_set_t& motifs,
                unsigned int start,
                unsigned int end,
                unsigned int errors,
-               const tts_t& tag)
+               __attribute__((unused)) const tts_t& tag)
 {
     auto motif_length = seqan::length(motif);
     auto st = seqan::getMotif(motif) == '+' ? start : motif_length - end;

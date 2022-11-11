@@ -203,7 +203,6 @@ void find_tfo_motifs(triplex_t& sequence,
 void find_tfo_motifs(motif_set_t& motifs,
                      motif_potential_set_t& potentials,
                      triplex_set_t& sequences,
-                     name_set_t& names,
                      const options& opts)
 {
     index_set_t indices(sequences.size(), 0);
@@ -212,7 +211,7 @@ void find_tfo_motifs(motif_set_t& motifs,
         return seqan::length(sequences[i]) > seqan::length(sequences[j]);
     });
 
-#pragma omp parallel
+SEQAN_OMP_PRAGMA(parallel)
 {
 #if !defined(_OPENMP)
     tfo_arguments tfo_args(motifs, potentials);
@@ -225,7 +224,7 @@ void find_tfo_motifs(motif_set_t& motifs,
 
     make_tfo_parsers(tfo_args, opts.max_interruptions);
 
-#pragma omp for schedule(dynamic) nowait
+SEQAN_OMP_PRAGMA(for schedule(dynamic) nowait)
     for (unsigned int i = 0; i < sequences.size(); i++) {
         if (opts.filter_repeats) {
             filter_repeats(tfo_args.repeats,
@@ -273,16 +272,16 @@ void find_tfo_motifs(const options& opts)
     if (!load_sequences(tfo_sequences, tfo_names, seqan::toCString(opts.tfo_file))) {
         return;
     }
-    find_tfo_motifs(tfo_motifs, tfo_potentials, tfo_sequences, tfo_names, opts);
+    find_tfo_motifs(tfo_motifs, tfo_potentials, tfo_sequences, opts);
 
-#pragma omp parallel sections num_threads(2)
+SEQAN_OMP_PRAGMA(parallel sections num_threads(2))
 {
-#pragma omp section
+SEQAN_OMP_PRAGMA(section)
     print_motifs(tfo_motifs, tfo_names, tfo_output_file_state, opts);
-#pragma omp section
+SEQAN_OMP_PRAGMA(section)
     print_summary(tfo_potentials, tfo_names, tfo_output_file_state, opts);
 } // #pragma omp parallel sections num_threads(2)
 
     destroy_output_state(tfo_output_file_state);
-    std::cout << "\e[1mTFO search:\e[0m done\n";
+    std::cout << "\033[1mTFO search:\033[0m done\n";
 }

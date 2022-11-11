@@ -113,12 +113,12 @@ public:
         data_end_position(endPosition(_other))
     {}
 
-    inline Segment &
-    operator = (Segment const & source)
-    {
-        assign(*this, source);
-        return *this;
-    }
+    // inline Segment &
+    // operator = (Segment const & source)
+    // {
+    //     assign(*this, source);
+    //     return *this;
+    // }
 
     template<typename T> explicit operator T () const
     {

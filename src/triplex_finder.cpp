@@ -274,7 +274,7 @@ void match_tfo_tts_motifs(match_set_set_t& matches,
     matches.resize(omp_get_max_threads());
 #endif
 
-#pragma omp parallel
+SEQAN_OMP_PRAGMA(parallel)
 {
 #if !defined(_OPENMP)
     tpx_arguments tpx_args(matches, potentials, opts);
@@ -288,7 +288,7 @@ void match_tfo_tts_motifs(match_set_set_t& matches,
 #if defined(_OPENMP)
     uint64_t chunk_size = std::min(tfo_size, tts_size);
 #endif
-#pragma omp for schedule(dynamic, chunk_size) collapse(2) nowait
+SEQAN_OMP_PRAGMA(for schedule(dynamic, chunk_size) collapse(2) nowait)
     for (uint64_t i = 0; i < tfo_size; i++) {
         for (uint64_t j = 0; j < tts_size; j++) {
             search_triplex(tfo_motifs[i], i, tts_motifs[j], j, tpx_args, opts);
@@ -336,7 +336,7 @@ void find_triplexes(const options& opts)
     if (!load_sequences(tfo_sequences, tfo_names, seqan::toCString(opts.tfo_file))) {
         return;
     }
-    find_tfo_motifs(tfo_motifs, tfo_potentials, tfo_sequences, tfo_names, opts);
+    find_tfo_motifs(tfo_motifs, tfo_potentials, tfo_sequences, opts);
 
     name_set_t tts_names;
     motif_set_t tts_motifs;
@@ -355,15 +355,15 @@ void find_triplexes(const options& opts)
             break;
         }
 
-        find_tts_motifs(tts_motifs, tts_potentials, tts_sequences, tts_names, opts);
+        find_tts_motifs(tts_motifs, tts_potentials, tts_sequences, opts);
         match_tfo_tts_motifs(matches, potentials, tfo_motifs, tts_motifs, opts);
 
-#pragma omp parallel sections num_threads(2)
+SEQAN_OMP_PRAGMA(parallel sections num_threads(2))
 {
-#pragma omp section
+SEQAN_OMP_PRAGMA(section)
     print_triplex_pairs(matches, tfo_motifs, tfo_names, tts_motifs, tts_names, tpx_output_file_state, opts);
-#pragma omp section
-    print_triplex_summary(potentials, tfo_names, tts_names, tpx_output_file_state, opts);
+SEQAN_OMP_PRAGMA(section)
+    print_triplex_summary(potentials, tfo_names, tts_names, tpx_output_file_state);
 } // #pragma omp parallel sections num_threads(2)
 
         tts_names.clear();
@@ -382,5 +382,5 @@ void find_triplexes(const options& opts)
 
     destroy_output_state(tpx_output_file_state);
     destroy_loader_state(tts_input_file_state);
-    std::cout << "\e[1mTPX search:\e[0m done\n";
+    std::cout << "\033[1mTPX search:\033[0m done\n";
 }

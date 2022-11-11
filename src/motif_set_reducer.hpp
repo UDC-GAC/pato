@@ -37,7 +37,7 @@ struct second_t
 };
 
 template<typename map_t>
-second_t<typename map_t::value_type> second(const map_t& m)
+second_t<typename map_t::value_type> second(__attribute__((unused)) const map_t& m)
 {
     return second_t<typename map_t::value_type>();
 }

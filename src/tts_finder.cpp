@@ -151,7 +151,6 @@ void find_tts_motifs(triplex_t& sequence,
 void find_tts_motifs(motif_set_t& motifs,
                      motif_potential_set_t& potentials,
                      triplex_set_t& sequences,
-                     name_set_t& names,
                      const options& opts)
 {
     index_set_t indices(sequences.size(), 0);
@@ -160,7 +159,7 @@ void find_tts_motifs(motif_set_t& motifs,
         return seqan::length(sequences[i]) > seqan::length(sequences[j]);
     });
 
-#pragma omp parallel
+SEQAN_OMP_PRAGMA(parallel)
 {
 #if !defined(_OPENMP)
     tts_arguments tts_args(motifs, potentials);
@@ -173,7 +172,7 @@ void find_tts_motifs(motif_set_t& motifs,
 
     make_tts_parsers(tts_args, opts.max_interruptions);
 
-#pragma omp for schedule(dynamic) nowait
+SEQAN_OMP_PRAGMA(for schedule(dynamic) nowait)
     for (unsigned int i = 0; i < sequences.size(); i++) {
         if (opts.filter_repeats) {
             filter_repeats(tts_args.repeats,
@@ -226,13 +225,13 @@ void find_tts_motifs(const options& opts)
         if (!load_sequences(tts_sequences, tts_names, tts_input_file_state, opts)) {
             break;
         }
-        find_tts_motifs(tts_motifs, tts_potentials, tts_sequences, tts_names, opts);
+        find_tts_motifs(tts_motifs, tts_potentials, tts_sequences, opts);
 
-#pragma omp parallel sections num_threads(2)
+SEQAN_OMP_PRAGMA(parallel sections num_threads(2))
 {
-#pragma omp section
+SEQAN_OMP_PRAGMA(section)
         print_motifs(tts_motifs, tts_names, tts_output_file_state, opts);
-#pragma omp section
+SEQAN_OMP_PRAGMA(section)
         print_summary(tts_potentials, tts_names, tts_output_file_state, opts);
 } // #pragma omp parallel sections num_threads(2)
 
@@ -244,5 +243,5 @@ void find_tts_motifs(const options& opts)
 
     destroy_output_state(tts_output_file_state);
     destroy_loader_state(tts_input_file_state);
-    std::cout << "\e[1mTTS search:\e[0m done\n";
+    std::cout << "\033[1mTTS search:\033[0m done\n";
 }

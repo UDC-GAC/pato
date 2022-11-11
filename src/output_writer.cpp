@@ -433,8 +433,7 @@ void print_triplex_pairs(match_set_set_t& matches,
 void print_triplex_summary(potential_set_t& potentials,
                            name_set_t& tfo_names,
                            name_set_t& tts_names,
-                           output_writer_state_t& state,
-                           const options& opts)
+                           output_writer_state_t& state)
 {
     for (auto& potential_entry : potentials) {
         auto& potential = potential_entry.second;
