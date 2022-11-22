@@ -255,7 +255,7 @@ SEQAN_OMP_PRAGMA(for schedule(dynamic) nowait)
 void find_tfo_motifs(const options& opts)
 {
     if (!file_exists(seqan::toCString(opts.tfo_file))) {
-        std::cout << "PATO: error opening TFO file '" << opts.tfo_file << "'\n";
+        std::cerr << "PATO: error opening TFO file '" << opts.tfo_file << "'\n";
         return;
     }
 

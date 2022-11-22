@@ -203,7 +203,7 @@ SEQAN_OMP_PRAGMA(for schedule(dynamic) nowait)
 void find_tts_motifs(const options& opts)
 {
     if (!file_exists(seqan::toCString(opts.tts_file))) {
-        std::cout << "PATO: error opening TTS file '" << opts.tts_file << "'\n";
+        std::cerr << "PATO: error opening TTS file '" << opts.tts_file << "'\n";
         return;
     }
 

@@ -315,7 +315,7 @@ void find_triplexes(const options& opts)
 {
     if (!file_exists(seqan::toCString(opts.tfo_file))
         || !file_exists(seqan::toCString(opts.tts_file))) {
-        std::cout << "PATO: error opening input files\n";
+        std::cerr << "PATO: error opening input files\n";
         return;
     }
 

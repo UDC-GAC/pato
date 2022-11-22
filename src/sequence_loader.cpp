@@ -47,7 +47,7 @@ bool file_exists(const char *file_name)
 bool create_loader_state(sequence_loader_state_t& state, const options& opts)
 {
     if (!seqan::open(state.fasta_file, seqan::toCString(opts.tts_file))) {
-        std::cout << "PATO: error opening input file '" << opts.tts_file << "'\n";
+        std::cerr << "PATO: error opening input file '" << opts.tts_file << "'\n";
         return false;
     }
     return true;
@@ -64,7 +64,7 @@ bool load_sequences(triplex_set_t& sequences,
 {
     seqan::SeqFileIn fasta_file;
     if (!seqan::open(fasta_file, file_name)) {
-        std::cout << "PATO: error opening input file '" << file_name << "'\n";
+        std::cerr << "PATO: error opening input file '" << file_name << "'\n";
         return false;
     }
 
