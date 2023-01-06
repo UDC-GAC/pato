@@ -10,8 +10,12 @@ jobs:
         steps:
         - name: checkout
           uses: actions/checkout@v2
+        - name: set up omp
+          run: >
+            sudo apt-get update -y &&
+            sudo apt-get install -y libomp-dev
         - name: compile pato
-          run: make clang BUILD=serial LDLIBS="-lrt" -j 4 && make clang BUILD=release LDLIBS="-lrt" -j 4
+          run: make clang BUILD=serial -j4 && make clang BUILD=release -j4
           working-directory: ${{ github.workspace }}
         - name: run tests
           run: bash test.bash clang
