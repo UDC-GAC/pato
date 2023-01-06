@@ -38,4 +38,4 @@ user@host:/path/to/pato$ bash test/test.bash gnu
 ```
 
 ## License
-PATO: high PerformAnce TriplexatOr is free software and as such it is distributed under the [MIT License](LICENSE). However, PATO: high PerformAnce TriplexatOr makes use of several modules which are not original pieces of work. Therefore, their usage is subject to their corresponding [THIRDPARTLICENSE](THIRDPARTYLICENSES) and all rights are reserved to their authors.
+PATO: high PerformAnce TriplexatOr is free software and as such it is distributed under the [MIT License](LICENSE). However, PATO: high PerformAnce TriplexatOr makes use of several modules which are not original pieces of work. Therefore, their usage is subject to their corresponding [THIRDPARTYLICENSE](THIRDPARTYLICENSES) and all rights are reserved to their authors.
