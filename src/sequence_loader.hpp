@@ -37,7 +37,7 @@ struct sequence_loader_state_t
 
 bool file_exists(const char *file_name);
 
-bool create_loader_state(sequence_loader_state_t& state, const options& opts);
+bool create_loader_state(sequence_loader_state_t& state, const char *file_name);
 void destroy_loader_state(sequence_loader_state_t& state);
 
 bool load_sequences(triplex_set_t& sequences,

@@ -71,8 +71,8 @@ bool parse_command_line(options& opts, int argc, char *argv[])
     seqan::addDescription(parser, "PATO is a high performance tool for the fast and efficient detection of triple helices and triplex features in nucleotide sequences. PATO is a modern altenative to Triplexator and TDF and functions as a drop in replacement to accelerate the triplex analyses in multicore computers. Moreover, PATO's efficiency allows a more exhaustive search of the triplex-forming solution space, and so PATO achieves higher levels of prediction accuracy in far less time than other tools in the state of the art.");
 
     seqan::setDate(parser, "November 2022");
-    seqan::setVersion(parser, "v0.0.0");
-    seqan::setUrl(parser, "https://github.com/amatria/pato");
+    seqan::setVersion(parser, "v0.0.1");
+    seqan::setUrl(parser, "https://github.com/UDC-GAC/pato");
     seqan::setShortCopyright(parser, "2022 Iñaki Amatria-Barral.");
     seqan::setCompilationOpts(parser, "COMPILATIONOPTS_PLACEHOLDER");
 
@@ -82,28 +82,28 @@ bool parse_command_line(options& opts, int argc, char *argv[])
     seqan::addSection(parser, "Main options");
     seqan::addOption(parser, seqan::ArgParseOption("l", "lower-length-bound", "Minimum triplex feature length required.", seqan::ArgParseOption::INTEGER));
     seqan::addOption(parser, seqan::ArgParseOption("L", "upper-length-bound", "Maximum triplex feature length permitted (disable with -1).", seqan::ArgParseOption::INTEGER));
-    seqan::addOption(parser, seqan::ArgParseOption("e", "error-rate", "Set the maximal error rate tolerated in %.", seqan::ArgParseOption::DOUBLE));
-    seqan::addOption(parser, seqan::ArgParseOption("E", "maximal-error", "Set the maximal overall error tolerated (disable with -1).", seqan::ArgParseOption::INTEGER));
+    seqan::addOption(parser, seqan::ArgParseOption("e", "error-rate", "Maximal error rate tolerated in %.", seqan::ArgParseOption::DOUBLE));
+    seqan::addOption(parser, seqan::ArgParseOption("E", "maximal-error", "Maximal overall error tolerated (disable with -1).", seqan::ArgParseOption::INTEGER));
     seqan::addOption(parser, seqan::ArgParseOption("c", "consecutive-errors", "Maximum number of consecutive errors.", seqan::ArgParseOption::INTEGER));
-    seqan::addOption(parser, seqan::ArgParseOption("g", "min-guanine", "Set the minimal guanine proportion required in %.", seqan::ArgParseOption::DOUBLE));
-    seqan::addOption(parser, seqan::ArgParseOption("G", "max-guanine", "Set the maximal guanine proportion allowed in %.", seqan::ArgParseOption::DOUBLE));
+    seqan::addOption(parser, seqan::ArgParseOption("g", "min-guanine", "Minimal guanine proportion required in %.", seqan::ArgParseOption::DOUBLE));
+    seqan::addOption(parser, seqan::ArgParseOption("G", "max-guanine", "Maximal guanine proportion allowed in %.", seqan::ArgParseOption::DOUBLE));
     seqan::addOption(parser, seqan::ArgParseOption("m", "triplex-motifs", "Triplex motifs allowed [R,Y,M,P,A].", seqan::ArgParseOption::STRING));
     seqan::addOption(parser, seqan::ArgParseOption("mpmg", "mixed-parallel-max-guanine", "Maximum guanine content to consider parallel binding in a mixed-motif in %.", seqan::ArgParseOption::DOUBLE));
     seqan::addOption(parser, seqan::ArgParseOption("mamg", "mixed-antiparallel-min-guanine", "Minimum guanine content to consider anti-parallel binding in a mixed-motif in %.", seqan::ArgParseOption::DOUBLE));
     seqan::addOption(parser, seqan::ArgParseOption("b", "minimum-block-run", "Required number of consecutive matches.", seqan::ArgParseOption::INTEGER));
     seqan::addOption(parser, seqan::ArgParseOption("a", "all-matches", "Process and report all sub-matches in addition to the longest match.", seqan::ArgParseOption::BOOL));
     seqan::addSection(parser, "Filtering options");
-    seqan::addOption(parser, seqan::ArgParseOption("fr", "filter-repeats", "Disregards repeated and low-complex regions if enabled.", seqan::ArgParseOption::BOOL));
-    seqan::addOption(parser, seqan::ArgParseOption("mrl", "minimum-repeat-length", "Minimum length requirement for low-complex regions to be filtered.", seqan::ArgParseOption::INTEGER));
-    seqan::addOption(parser, seqan::ArgParseOption("mrp", "maximum-repeat-period", "Maximum repeat period for low-complex regions to be filtered.", seqan::ArgParseOption::INTEGER));
+    seqan::addOption(parser, seqan::ArgParseOption("fr", "filter-repeats", "Disregard repeated and low-complex regions.", seqan::ArgParseOption::BOOL));
+    seqan::addOption(parser, seqan::ArgParseOption("mrl", "minimum-repeat-length", "Minimum length requirement to filter low-complex regions.", seqan::ArgParseOption::INTEGER));
+    seqan::addOption(parser, seqan::ArgParseOption("mrp", "maximum-repeat-period", "Maximum repeat period to filter low-complex regions.", seqan::ArgParseOption::INTEGER));
     seqan::addOption(parser, seqan::ArgParseOption("mf", "merge-features", "Merge overlapping features into a cluster and report the spanning region.", seqan::ArgParseOption::BOOL));
     seqan::addSection(parser, "Output options");
     seqan::addOption(parser, seqan::ArgParseOption("o", "output", "Output file name", seqan::ArgParseOption::STRING));
-    seqan::addOption(parser, seqan::ArgParseOption("of", "output-format", "Set the output format [0,1,2].", seqan::ArgParseOption::INTEGER));
+    seqan::addOption(parser, seqan::ArgParseOption("of", "output-format", "Output format [0,1,2].", seqan::ArgParseOption::INTEGER));
     seqan::addOption(parser, seqan::ArgParseOption("po", "pretty-output", "Indicate matching/mismatching characters with upper/lower case.", seqan::ArgParseOption::BOOL));
-    seqan::addOption(parser, seqan::ArgParseOption("er", "error-reference", "Reference to which the error should correspond [0,1,2].", seqan::ArgParseOption::INTEGER));
+    seqan::addOption(parser, seqan::ArgParseOption("er", "error-reference", "Error reference format [0,1,2].", seqan::ArgParseOption::INTEGER));
     seqan::addSection(parser, "Performance options");
-    seqan::addOption(parser, seqan::ArgParseOption("cs", "chunk-size", "Set the maximum number of sequences that may be processed simultaneously (less simultaneous sequences equals less memory usage).", seqan::ArgParseOption::INTEGER));
+    seqan::addOption(parser, seqan::ArgParseOption("cs", "chunk-size", "Maximum number of sequences that may be processed simultaneously (less simultaneous sequences equals less memory usage).", seqan::ArgParseOption::INTEGER));
 
     // input options
     seqan::setDefaultValue(parser, "ss", "(null)");
@@ -224,15 +224,15 @@ bool parse_command_line(options& opts, int argc, char *argv[])
         return false;
     }
     if (opts.error_reference >= error_reference_t::last) {
-        std::cerr << "PATO: error reference not known\n";
+        std::cerr << "PATO: unknown error reference format\n";
         return false;
     }
     if (opts.output_format >= output_format_t::last) {
-        std::cerr << "PATO: output format not known\n";
+        std::cerr << "PATO: unknown output format\n";
         return false;
     }
     if (opts.chunk_size == 0) {
-        std::cerr << "PATO: chunk size must be a positive number\n";
+        std::cerr << "PATO: the chunk size must be a positive number\n";
         return false;
     }
 

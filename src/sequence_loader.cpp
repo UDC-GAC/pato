@@ -44,10 +44,10 @@ bool file_exists(const char *file_name)
     return seqan::open(fasta_file, file_name);
 }
 
-bool create_loader_state(sequence_loader_state_t& state, const options& opts)
+bool create_loader_state(sequence_loader_state_t& state, const char *file_name)
 {
-    if (!seqan::open(state.fasta_file, seqan::toCString(opts.tts_file))) {
-        std::cerr << "PATO: error opening input file '" << opts.tts_file << "'\n";
+    if (!seqan::open(state.fasta_file, file_name)) {
+        std::cerr << "PATO: error opening input file '" << file_name << "'\n";
         return false;
     }
     return true;

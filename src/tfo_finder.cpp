@@ -178,10 +178,10 @@ void find_tfo_motifs(triplex_t& sequence,
                  || tfo_args.filter_args.ornt == orientation_t::antiparallel)
                 && opts.mixed_antiparallel_min_guanine <= opts.max_guanine_rate) {
                 motif_t motif(segment, false, id, true, 'M');
-                filter_guanine_error_rate(motif,
-                                          tfo_args.filter_args,
-                                          mixed_motif_t(),
-                                          opts);
+                matches_m += filter_guanine_error_rate(motif,
+                                                       tfo_args.filter_args,
+                                                       mixed_motif_t(),
+                                                       opts);
             }
         }
         tfo_args.segments.clear();
@@ -255,7 +255,7 @@ SEQAN_OMP_PRAGMA(for schedule(dynamic) nowait)
 void find_tfo_motifs(const options& opts)
 {
     if (!file_exists(seqan::toCString(opts.tfo_file))) {
-        std::cerr << "PATO: error opening TFO file '" << opts.tfo_file << "'\n";
+        std::cerr << "PATO: error opening input file '" << opts.tfo_file << "'\n";
         return;
     }
 
@@ -283,5 +283,6 @@ SEQAN_OMP_PRAGMA(section)
 } // #pragma omp parallel sections num_threads(2)
 
     destroy_output_state(tfo_output_file_state);
+
     std::cout << "\033[1mTFO search:\033[0m done\n";
 }

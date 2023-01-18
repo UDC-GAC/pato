@@ -313,9 +313,12 @@ SEQAN_OMP_PRAGMA(for schedule(dynamic, chunk_size) collapse(2) nowait)
 
 void find_triplexes(const options& opts)
 {
-    if (!file_exists(seqan::toCString(opts.tfo_file))
-        || !file_exists(seqan::toCString(opts.tts_file))) {
-        std::cerr << "PATO: error opening input files\n";
+    if (!file_exists(seqan::toCString(opts.tfo_file))) {
+        std::cerr << "PATO: error opening input file '" << opts.tfo_file << "'\n";
+        return;
+    }
+    if (!file_exists(seqan::toCString(opts.tts_file))) {
+        std::cerr << "PATO: error opening input file '" << opts.tts_file << "'\n";
         return;
     }
 
@@ -324,7 +327,7 @@ void find_triplexes(const options& opts)
         return;
     }
     sequence_loader_state_t tts_input_file_state;
-    if (!create_loader_state(tts_input_file_state, opts)) {
+    if (!create_loader_state(tts_input_file_state, seqan::toCString(opts.tts_file))) {
         return;
     }
 
@@ -382,5 +385,6 @@ SEQAN_OMP_PRAGMA(section)
 
     destroy_output_state(tpx_output_file_state);
     destroy_loader_state(tts_input_file_state);
+
     std::cout << "\033[1mTPX search:\033[0m done\n";
 }

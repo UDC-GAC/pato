@@ -203,7 +203,7 @@ SEQAN_OMP_PRAGMA(for schedule(dynamic) nowait)
 void find_tts_motifs(const options& opts)
 {
     if (!file_exists(seqan::toCString(opts.tts_file))) {
-        std::cerr << "PATO: error opening TTS file '" << opts.tts_file << "'\n";
+        std::cerr << "PATO: error opening input file '" << opts.tts_file << "'\n";
         return;
     }
 
@@ -212,7 +212,7 @@ void find_tts_motifs(const options& opts)
         return;
     }
     sequence_loader_state_t tts_input_file_state;
-    if (!create_loader_state(tts_input_file_state, opts)) {
+    if (!create_loader_state(tts_input_file_state, seqan::toCString(opts.tts_file))) {
         return;
     }
 
@@ -243,5 +243,6 @@ SEQAN_OMP_PRAGMA(section)
 
     destroy_output_state(tts_output_file_state);
     destroy_loader_state(tts_input_file_state);
+
     std::cout << "\033[1mTTS search:\033[0m done\n";
 }
