@@ -1,23 +1,39 @@
 name: compile and test gnu
 on:
-    push:
-        branches: [ master ]
-    pull_request:
-        branches: [ master ]
+  push:
+      branches: [ master ]
+  pull_request:
+      branches: [ master ]
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-        - name: checkout
-          uses: actions/checkout@v2
-        - name: set up gcc
-          run: >
-            sudo apt-get update -y &&
-            sudo apt-get install -y build-essential &&
-            sudo apt-get install -y libomp-dev
-        - name: compile pato
-          run: make BUILD=serial -j4 && make BUILD=release -j4
-          working-directory: ${{ github.workspace }}
-        - name: run tests
-          run: bash test.bash
-          working-directory: ${{ github.workspace }}/test
+  ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: set up gcc
+        run: >
+          sudo apt-get update -y &&
+          sudo apt-get install -y build-essential libomp-dev
+      - name: compile pato
+        run: >
+          make gnu BUILD=serial -j4 &&
+          make gnu BUILD=release -j4
+        working-directory: ${{ github.workspace }}
+      - name: run tests
+        run: bash test/test.bash gnu
+        working-directory: ${{ github.workspace }}
+  macos:
+    runs-on: macos-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: set up gcc
+        run: brew install gcc@12
+      - name: compile pato
+        run: >
+          make gnu -j4 BUILD=release CXX=g++-12 LD=g++-12 &&
+          make gnu -j4 BUILD=serial CXX=g++-12 LD=g++-12
+        working-directory: ${{ github.workspace }}
+      - name: run tests
+        run: bash test/test.bash gnu
+        working-directory: ${{ github.workspace }}

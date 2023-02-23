@@ -1,22 +1,43 @@
 name: compile and test clang
 on:
-    push:
-        branches: [ master ]
-    pull_request:
-        branches: [ master ]
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-        - name: checkout
-          uses: actions/checkout@v2
-        - name: set up omp
-          run: >
-            sudo apt-get update -y &&
-            sudo apt-get install -y libomp-dev
-        - name: compile pato
-          run: make clang BUILD=serial -j4 && make clang BUILD=release -j4
-          working-directory: ${{ github.workspace }}
-        - name: run tests
-          run: bash test.bash clang
-          working-directory: ${{ github.workspace }}/test
+  ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: set up clang
+        run: >
+          sudo apt-get update -y &&
+          sudo apt-get install -y build-essential clang libomp-dev
+      - name: compile pato
+        run: >
+          make clang BUILD=serial -j4 &&
+          make clang BUILD=release -j4
+        working-directory: ${{ github.workspace }}
+      - name: run tests
+        run: bash test/test.bash clang
+        working-directory: ${{ github.workspace }}
+  macos:
+    runs-on: macos-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: set up clang
+        run: brew install llvm@15
+      - name: compile pato
+        run: >
+          CXXFLAGS="$($(brew --prefix llvm@15)/bin/llvm-config --cxxflags)" LDFLAGS="$($(brew --prefix llvm@15)/bin/llvm-config --ldflags)" make clang -j4 BUILD=release \
+            CXX=$(brew --prefix llvm@15)/bin/clang++ \
+            LD=$(brew --prefix llvm@15)/bin/clang++ &&
+          CXXFLAGS="$($(brew --prefix llvm@15)/bin/llvm-config --cxxflags)" LDFLAGS="$($(brew --prefix llvm@15)/bin/llvm-config --ldflags)" make clang -j4 BUILD=serial \
+            CXX=$(brew --prefix llvm@15)/bin/clang++ \
+            LD=$(brew --prefix llvm@15)/bin/clang++
+        working-directory: ${{ github.workspace }}
+      - name: run tests
+        run: bash test/test.bash clang
+        working-directory: ${{ github.workspace }}

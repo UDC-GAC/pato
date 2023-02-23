@@ -28,11 +28,6 @@ SRCS=$(wildcard $(SRCSDIR)/*.cpp)
 OBJS=$(patsubst $(SRCSDIR)/%.cpp,$(OBJSDIR)/$(BUILD)/%.o,$(SRCS))
 DEPS=$(patsubst $(SRCSDIR)/%.cpp,$(OBJSDIR)/$(BUILD)/%.d,$(SRCS))
 
-patch_compilationopts:
-	@sed -i `[ $(shell uname -s) = "Darwin" ] && echo "-E"` "s/seqan::setCompilationOpts(parser,.*);/`echo "seqan::setCompilationOpts(parser, \\\"CXX=${CXX} CXXFLAGS=${CXXFLAGS} LD=${LD} LDFLAGS=${LDFLAGS}\\\");" | sed -e 's/  */ /g'`/g" src/command_line_parser.hpp
-	@[ $(shell uname -s) = "Darwin" ] && rm -rf src/command_line_parser.hpp-E || :
-	$(MAKE) -f makefiles/Makefile.gnu pato.$(BUILD)
-
 pato.$(BUILD): $(OBJS)
 	@mkdir -p $(DESTDIR)
 	$(LD) $(LDFLAGS) -o $(DESTDIR)/$@ $^ $(LDLIBS)

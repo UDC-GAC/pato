@@ -1426,9 +1426,11 @@ void HtmlToolDocPrinter_::print(std::ostream & stream, ToolDoc const & doc)
     // Print version, date and url.
     stream << "<h2>Version</h2>\n"
            << "<strong>Last update:</strong> " << _toHtml(doc._date) << "<br>\n<strong>"
-           << doc._name << " version:</strong> " << doc._version << "<br>\n<strong>"
-           << doc._name << " compilation options:</strong> <code>" << doc._compilationOpts << "</code><br>\n"
-           << "<strong>SeqAn version:</strong> " << SEQAN_VERSION_MAJOR << '.' <<  SEQAN_VERSION_MINOR << '.'
+           << doc._name << " version:</strong> " << doc._version << "<br>\n";
+    if (!empty(doc._compilationOpts))
+        stream << "<strong>" << doc._name << " compilation options:</strong> <code>"
+               << doc._compilationOpts << "</code><br>\n";
+    stream << "<strong>SeqAn version:</strong> " << SEQAN_VERSION_MAJOR << '.' <<  SEQAN_VERSION_MINOR << '.'
            << SEQAN_VERSION_PATCH;
     if (SEQAN_VERSION_PRE_RELEASE != 0)
         stream << "-pre" << SEQAN_VERSION_PRE_RELEASE;
@@ -1532,8 +1534,10 @@ void TextToolDocPrinter_::print(std::ostream & stream, ToolDoc const & doc)
     stream << _toText("\\fB") << "Last update: " << _toText("\\fP") << doc._date << "\n";
     std::fill_n(out, _layout.leftPadding, ' ');
     stream << _toText("\\fB") << doc._name << " version: " << _toText("\\fP") << doc._version << "\n";
-    std::fill_n(out, _layout.leftPadding, ' ');
-    stream << _toText("\\fB") << doc._name << " compilation options: " << _toText("\\fP") << doc._compilationOpts << "\n";
+    if (!empty(doc._compilationOpts)) {
+        std::fill_n(out, _layout.leftPadding, ' ');
+        stream << _toText("\\fB") << doc._name << " compilation options: " << _toText("\\fP") << doc._compilationOpts << "\n";
+    }
     std::fill_n(out, _layout.leftPadding, ' ');
     stream << _toText("\\fB") << "SeqAn version: " << _toText("\\fP") << SEQAN_VERSION_MAJOR << '.'
            <<  SEQAN_VERSION_MINOR << '.' << SEQAN_VERSION_PATCH;
