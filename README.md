@@ -36,7 +36,7 @@ brew install gcc@12
 
 Afterwards, make sure `gcc-12` and `g++-12` are included in your system's `PATH` variable by executing:
 ```bash
-echo "export PATH=$(dirname $(which brew)):\$PATH" >> ~/.zshrc && source ~/.zshrc
+echo "export PATH=$(brew --prefix gcc@12)/bin:\$PATH" >> ~/.zshrc && source ~/.zshrc
 ```
 
 Lastly, check that you now indeed have a working Homebrew `gcc-12` and `g++-12` installation by executing:
