@@ -4,7 +4,6 @@
 ![clang workflow](https://img.shields.io/github/actions/workflow/status/UDC-GAC/pato/compile-and-test-clang.yml?label=clang)
 [![issues](https://img.shields.io/github/issues/UDC-GAC/pato)](https://github.com/UDC-GAC/pato/issues)
 [![aur](https://repology.org/badge/version-for-repo/aur/pato.svg?header=AUR)](https://repology.org/project/pato/versions)
-
 [![release](https://img.shields.io/github/release/UDC-GAC/pato?include_prereleases=&sort=semver&color=blue)](https://github.com/UDC-GAC/pato/releases/)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 ![platform](https://img.shields.io/badge/platform-linux%20|%20linux--arm%20|%20macos%20|%20macos--m1%20|%20windows%20(wsl)-blue)
