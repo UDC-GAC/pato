@@ -3,7 +3,7 @@
 ![gnu workflow](https://img.shields.io/github/actions/workflow/status/UDC-GAC/pato/compile-and-test-gnu.yml?label=gnu)
 ![clang workflow](https://img.shields.io/github/actions/workflow/status/UDC-GAC/pato/compile-and-test-clang.yml?label=clang)
 [![issues](https://img.shields.io/github/issues/UDC-GAC/pato)](https://github.com/UDC-GAC/pato/issues)
-[![aur](https://repology.org/badge/version-for-repo/aur/pato.svg?header=AUR)](https://repology.org/project/pato/versions)
+[![doi](https://img.shields.io/badge/doi-btad134-blue)](https://doi.org/10.1093/bioinformatics/btad134)
 [![release](https://img.shields.io/github/release/UDC-GAC/pato?include_prereleases=&sort=semver&color=blue)](https://github.com/UDC-GAC/pato/releases/)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 ![platform](https://img.shields.io/badge/platform-linux%20|%20linux--arm%20|%20macos%20|%20macos--m1%20|%20windows%20(wsl)-blue)
@@ -122,6 +122,12 @@ If you are interested in testing the correctness of your installation, run the f
 make gnu -j$(getconf _NPROCESSORS_ONLN) BUILD=release
 make gnu -j$(getconf _NPROCESSORS_ONLN) BUILD=serial
 bash test/test.bash gnu
+```
+
+## Cite us
+If you use PATO: high PerformAnce TriplexatOr in your research, please cite our work using the following reference:
+```
+Iñaki Amatria-Barral, Jorge González-Domínguez and Juan Touriño. "PATO: Genome-wide prediction of lncRNA-DNA triple helices". Bioinformatics (2023)
 ```
 
 ## License
