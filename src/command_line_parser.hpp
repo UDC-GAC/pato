@@ -70,10 +70,11 @@ bool parse_command_line(options& opts, int argc, char *argv[])
     seqan::addUsageLine(parser, "[options] {-ss tfo_file | -ds tts_file | -ss tfo_file -ds tts_file}");
     seqan::addDescription(parser, "PATO is a high performance tool for the fast and efficient detection of triple helices and triplex features in nucleotide sequences. PATO is a modern altenative to Triplexator and TDF and functions as a drop in replacement to accelerate the triplex analyses in multicore computers. Moreover, PATO's efficiency allows a more exhaustive search of the triplex-forming solution space, and so PATO achieves higher levels of prediction accuracy in far less time than other tools in the state of the art.");
 
-    seqan::setDate(parser, "February 2023");
-    seqan::setVersion(parser, "v0.0.2");
+    seqan::setDate(parser, "March 2023");
+    seqan::setVersion(parser, "v0.0.3");
     seqan::setUrl(parser, "https://github.com/UDC-GAC/pato");
-    seqan::setShortCopyright(parser, "2022 Iñaki Amatria-Barral.");
+    seqan::setShortCopyright(parser, "2022 Iñaki Amatria-Barral, Universidade da Coruña; released under the MIT License.");
+    seqan::setCitation(parser, "Iñaki Amatria-Barral, Jorge González-Domínguez and Juan Touriño. \"PATO: Genome-wide prediction of lncRNA-DNA triple helices\". Bioinformatics (2023).");
 
     seqan::addSection(parser, "Input options");
     seqan::addOption(parser, seqan::ArgParseOption("ss", "single-strand-file", "File in FASTA format that is searched for TFOs (e.g. RNA or DNA).", seqan::ArgParseOption::STRING));
