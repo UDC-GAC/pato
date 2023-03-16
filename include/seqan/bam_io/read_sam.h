@@ -63,6 +63,7 @@ char const * FileExtensions<Sam, T>::VALUE[1] =
 template <typename T>
 struct MagicHeader<Sam, T>
 {
+    static size_t const SIZE = 0;
     static unsigned char const * VALUE;
 };
 

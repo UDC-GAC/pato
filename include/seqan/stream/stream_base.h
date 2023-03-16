@@ -98,21 +98,23 @@ typedef Tag<BZ2File_> BZ2File;
 template <typename T>
 struct MagicHeader<GZFile, T>
 {
-    static char const VALUE[3];
+    static size_t const SIZE = 3;
+    static char const VALUE[SIZE];
 };
 
 template <typename T>
-char const MagicHeader<GZFile, T>::VALUE[3] = { 0x1f, '\x8b', 0x08 };  // gzip's magic number
+char const MagicHeader<GZFile, T>::VALUE[MagicHeader<GZFile, T>::SIZE] = { 0x1f, '\x8b', 0x08 };  // gzip's magic number
 
 
 template <typename T>
 struct MagicHeader<BZ2File, T>
 {
-    static char const VALUE[3];
+    static size_t const SIZE = 3;
+    static char const VALUE[SIZE];
 };
 
 template <typename T>
-char const MagicHeader<BZ2File, T>::VALUE[3] = { 0x42, 0x5a, 0x68 };  // bzip2's magic number
+char const MagicHeader<BZ2File, T>::VALUE[MagicHeader<BZ2File, T>::SIZE] = { 0x42, 0x5a, 0x68 };  // bzip2's magic number
 
 // --------------------------------------------------------------------------
 // FileExtensions
@@ -199,14 +201,14 @@ guessFormatFromStream(TStream &istream, Tag<TFormat_>)
 
     SEQAN_ASSERT(istream.good());
 
-    if ((char *)MagicHeader<TFormat>::VALUE == NULL)
+    if (MagicHeader<TFormat>::SIZE == 0)
         return true;
 
     bool match = true;
 
     // check magic header
-    unsigned i;
-    for (i = 0; i != sizeof(MagicHeader<TFormat>::VALUE) / sizeof(char); ++i)
+    size_t i;
+    for (i = 0; i != MagicHeader<TFormat>::SIZE; ++i)
     {
         int c = (int)istream.get();
         if (c != (unsigned char)MagicHeader<TFormat>::VALUE[i])
@@ -219,7 +221,7 @@ guessFormatFromStream(TStream &istream, Tag<TFormat_>)
     }
 
     // unget all read characters
-    for (; i > 0; --i)
+    for (i = 0; i != MagicHeader<TFormat>::SIZE; ++i)
         istream.unget();
 
     SEQAN_ASSERT(istream.good());

@@ -99,11 +99,12 @@ typedef FormattedFile<Vcf, Output>  VcfFileOut;
 template <typename T>
 struct MagicHeader<Vcf, T>
 {
-    static unsigned char const VALUE[16];
+    static size_t const SIZE = 16;
+    static unsigned char const VALUE[SIZE];
 };
 
 template <typename T>
-unsigned char const MagicHeader<Vcf, T>::VALUE[16] =
+unsigned char const MagicHeader<Vcf, T>::VALUE[MagicHeader<Vcf, T>::SIZE] =
 {
     '#', '#', 'f', 'i', 'l', 'e', 'f', 'o', 'r', 'm', 'a', 't', '=', 'V', 'C', 'F'  // VCF's magic header
 };
@@ -111,11 +112,12 @@ unsigned char const MagicHeader<Vcf, T>::VALUE[16] =
 template <typename T>
 struct MagicHeader<Bcf, T>
 {
-    static unsigned char const VALUE[5];
+    static size_t const SIZE = 5;
+    static unsigned char const VALUE[SIZE];
 };
 
 template <typename T>
-unsigned char const MagicHeader<Bcf, T>::VALUE[5] = { 'B', 'C', 'F', '\2', '\1' };  // BCF2's magic header
+unsigned char const MagicHeader<Bcf, T>::VALUE[MagicHeader<Bcf, T>::SIZE] = { 'B', 'C', 'F', '\2', '\1' };  // BCF2's magic header
 
 // ----------------------------------------------------------------------------
 // Class FileExtensions

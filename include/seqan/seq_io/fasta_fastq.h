@@ -80,19 +80,21 @@ typedef Tag<Raw_> Raw;
 template <typename T>
 struct MagicHeader<Fasta, T>
 {
-    static char const VALUE[1];
+    static size_t const SIZE = 1;
+    static char const VALUE[SIZE];
 };
 template <typename T>
-char const MagicHeader<Fasta, T>::VALUE[1] = { '>' };  // Fasta's first character
+char const MagicHeader<Fasta, T>::VALUE[MagicHeader<Fasta, T>::SIZE] = { '>' };  // Fasta's first character
 
 
 template <typename T>
 struct MagicHeader<Fastq, T>
 {
-    static char const VALUE[1];
+    static size_t const SIZE = 1;
+    static char const VALUE[SIZE];
 };
 template <typename T>
-char const MagicHeader<Fastq, T>::VALUE[1] = { '@' };  // Fastq's first character
+char const MagicHeader<Fastq, T>::VALUE[MagicHeader<Fastq, T>::SIZE] = { '@' };  // Fastq's first character
 
 
 template <typename T>

@@ -67,10 +67,11 @@ typedef Tag<EmblSequence_> EmblSequence;
 template <typename T>
 struct MagicHeader<Embl, T>
 {
-    static char const VALUE[3];
+    static size_t const SIZE = 3;
+    static char const VALUE[SIZE];
 };
 template <typename T>
-char const MagicHeader<Embl, T>::VALUE[3] = { 'I','D',' ' };  // typical Embl header
+char const MagicHeader<Embl, T>::VALUE[MagicHeader<Embl, T>::SIZE] = { 'I','D',' ' };  // typical Embl header
 
 // --------------------------------------------------------------------------
 // Metafunction FileExtensions

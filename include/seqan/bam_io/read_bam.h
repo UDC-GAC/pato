@@ -71,11 +71,12 @@ char const * FileExtensions<Bam, T>::VALUE[1] =
 template <typename T>
 struct MagicHeader<Bam, T>
 {
-    static unsigned char const VALUE[4];
+    static size_t const SIZE = 4;
+    static unsigned char const VALUE[SIZE];
 };
 
 template <typename T>
-unsigned char const MagicHeader<Bam, T>::VALUE[4] = { 'B', 'A', 'M', '\1' };  // BAM's magic header
+unsigned char const MagicHeader<Bam, T>::VALUE[MagicHeader<Bam, T>::SIZE] = { 'B', 'A', 'M', '\1' }; // BAM's magic header
 
 // ============================================================================
 // Metafunctions

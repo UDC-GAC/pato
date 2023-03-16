@@ -104,11 +104,12 @@ struct CompressionContext<BgzfFile>:
 template <typename T>
 struct MagicHeader<BgzfFile, T>
 {
-    static char const VALUE[18];
+    static size_t const SIZE = 18;
+    static char const VALUE[SIZE];
 };
 
 template <typename T>
-char const MagicHeader<BgzfFile, T>::VALUE[18] =
+char const MagicHeader<BgzfFile, T>::VALUE[MagicHeader<BgzfFile, T>::SIZE] =
 {
     MagicHeader<GZFile>::VALUE[0], MagicHeader<GZFile>::VALUE[1], MagicHeader<GZFile>::VALUE[2],
     4, 0, 0, 0, 0, 0, '\xff', 6, 0, 'B', 'C', 2, 0, 0, 0
@@ -230,9 +231,9 @@ compress(TTarget & target, TSourceIterator & source, CompressionContext<BgzfFile
     TTargetChunk tChunk;
     TSourceChunk sChunk;
 
-    if (ctx.headerPos < sizeof(MagicHeader<BgzfFile>::VALUE))
+    if (ctx.headerPos < MagicHeader<BgzfFile>::SIZE)
     {
-        size_t headerLeft = sizeof(MagicHeader<BgzfFile>::VALUE) - ctx.headerPos;
+        size_t headerLeft = MagicHeader<BgzfFile>::SIZE - ctx.headerPos;
         reserveChunk(target, headerLeft, Output());
 
         tChunk = getChunk(target, Output());

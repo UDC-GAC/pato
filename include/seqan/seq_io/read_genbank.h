@@ -76,10 +76,11 @@ typedef Tag<GenBankSequence_> GenBankSequence;
 template <typename T>
 struct MagicHeader<GenBank, T>
 {
+    static size_t const SIZE = 6;
     static char const VALUE[6];
 };
 template <typename T>
-char const MagicHeader<GenBank, T>::VALUE[6] = { 'L','O','C','U','S',' ' };  // typical GenBank header
+char const MagicHeader<GenBank, T>::VALUE[MagicHeader<GenBank, T>::SIZE] = { 'L','O','C','U','S',' ' };  // typical GenBank header
 
 // --------------------------------------------------------------------------
 // Metafunction FileExtensions

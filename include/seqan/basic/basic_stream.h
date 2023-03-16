@@ -530,6 +530,7 @@ struct MagicHeader;
 template <typename T>
 struct MagicHeader<Nothing, T>
 {
+    static size_t const SIZE = 0;
     static char const * VALUE;
 };
 
