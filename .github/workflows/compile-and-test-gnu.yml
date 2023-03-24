@@ -2,8 +2,20 @@ name: compile and test gnu
 on:
   push:
       branches: [ master ]
+      paths:
+        - 'src/**'
+        - 'test/**'
+        - 'include/**'
+        - 'makefiles/Makefile.gnu'
+        - '.github/workflows/compile-and-test-gnu.yml'
   pull_request:
       branches: [ master ]
+      paths:
+        - 'src/**'
+        - 'test/**'
+        - 'include/**'
+        - 'makefiles/Makefile.gnu'
+        - '.github/workflows/compile-and-test-gnu.yml'
 jobs:
   ubuntu:
     runs-on: ubuntu-latest
