@@ -127,7 +127,7 @@ bash test/test.bash gnu
 ## Cite us
 If you use PATO: high PerformAnce TriplexatOr in your research, please cite our work using the following reference:
 ```
-Iñaki Amatria-Barral, Jorge González-Domínguez and Juan Touriño. "PATO: Genome-wide prediction of lncRNA-DNA triple helices". Bioinformatics (2023)
+Iñaki Amatria-Barral, Jorge González-Domínguez and Juan Touriño. "PATO: genome-wide prediction of lncRNA-DNA triple helices". Bioinformatics, 39(3):btad134, March 2023
 ```
 
 ## License
