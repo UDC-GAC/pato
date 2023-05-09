@@ -13,9 +13,9 @@ CXXFLAGS+=$(cxxflags.$(BUILD)) -DNDEBUG -DSEQAN_DISABLE_VERSION_CHECK -DSEQAN_EN
 
 LD=g++
 
-ldflags.serial=-flto
-ldflags.profile=-flto -p -g
-ldflags.release=-fopenmp -flto
+ldflags.serial=-flto=auto
+ldflags.profile=-flto=auto -p -g
+ldflags.release=-fopenmp -flto=auto
 
 # see file seqan/allocator_interface.h:211
 LDFLAGS+=-Wno-alloc-size-larger-than $(ldflags.$(BUILD))
