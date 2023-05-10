@@ -40,13 +40,13 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
       - name: set up clang
-        run: brew install llvm@15
+        run: brew install llvm@15 libomp
       - name: compile pato
         run: >
-          CXXFLAGS="$($(brew --prefix llvm@15)/bin/llvm-config --cxxflags)" LDFLAGS="$($(brew --prefix llvm@15)/bin/llvm-config --ldflags)" make clang -j4 BUILD=release \
+          CXXFLAGS="-I$(brew --prefix libomp)/include $($(brew --prefix llvm@15)/bin/llvm-config --cxxflags)" LDFLAGS="-L$(brew --prefix libomp)/lib $($(brew --prefix llvm@15)/bin/llvm-config --ldflags)" make clang -j4 BUILD=release \
             CXX=$(brew --prefix llvm@15)/bin/clang++ \
             LD=$(brew --prefix llvm@15)/bin/clang++ &&
-          CXXFLAGS="$($(brew --prefix llvm@15)/bin/llvm-config --cxxflags)" LDFLAGS="$($(brew --prefix llvm@15)/bin/llvm-config --ldflags)" make clang -j4 BUILD=serial \
+          CXXFLAGS="-I$(brew --prefix libomp)/include $($(brew --prefix llvm@15)/bin/llvm-config --cxxflags)" LDFLAGS="-L$(brew --prefix libomp)/lib $($(brew --prefix llvm@15)/bin/llvm-config --ldflags)" make clang -j4 BUILD=serial \
             CXX=$(brew --prefix llvm@15)/bin/clang++ \
             LD=$(brew --prefix llvm@15)/bin/clang++
         working-directory: ${{ github.workspace }}
