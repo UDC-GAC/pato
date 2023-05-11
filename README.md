@@ -30,7 +30,7 @@ To compile and execute PATO: high PerformAnce TriplexatOr, the following softwar
 A valid combination of these tools may be: GNU Make v3.82, and GCC v9.3.0.
 
 ### macOS requirements
-Because Apple's `clang` compiler does not support OpenMP parallelism, macOS users are required to install an OpenMP-enabled compiler in order to build PATO: high PerformAnce TriplexatOr from source. To do so, we recommend installing the GNU Compiler Collection v12 (or any other version with support for the c++17 standard) using Homebrew as follows:
+Because Apple's `clang` compiler does not support OpenMP parallelism, macOS users are required to install an OpenMP-enabled compiler in order to build PATO: high PerformAnce TriplexatOr from source. To do so, we recommend installing the GNU Compiler Collection v12 (or any other version with support for the C++17 standard) using Homebrew as follows:
 ```bash
 $ brew install gcc@12
 ```
