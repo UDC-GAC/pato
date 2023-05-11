@@ -104,8 +104,9 @@ void find_tfo_motifs(triplex_t& sequence,
                      tfo_arguments& tfo_args,
                      const options& opts)
 {
-    unsigned int matches_y, matches_r, matches_m;
-    matches_y = matches_r = matches_m = 0;
+    unsigned int matches_y = 0;
+    unsigned int matches_r = 0;
+    unsigned int matches_m = 0;
 
     // TC motif
     if (opts.tc_motif) {

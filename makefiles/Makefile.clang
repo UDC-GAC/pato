@@ -3,10 +3,10 @@ BUILD=release
 INCLUDES+=-Iinclude
 
 CXX=clang++
-CXXFLAGS+=-std=c++17 -Wall
+CXXFLAGS+=-std=c++17 -Wall -Wextra -Wpedantic
 
 cxxflags.serial=-flto -O3 -march=native
-cxxflags.release=-fopenmp -flto -O3 -march=native
+cxxflags.release=-Wopenmp -fopenmp -flto -O3 -march=native
 
 CXXFLAGS+=$(cxxflags.$(BUILD)) -DNDEBUG -DSEQAN_DISABLE_VERSION_CHECK -DSEQAN_ENABLE_PARALLELISM=0
 

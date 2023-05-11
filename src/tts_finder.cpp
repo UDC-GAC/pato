@@ -101,8 +101,8 @@ void find_tts_motifs(triplex_t& sequence,
                      tts_arguments& tts_args,
                      const options& opts)
 {
-    unsigned int matches_plus, matches_minus;
-    matches_plus = matches_minus = 0;
+    unsigned int matches_plus = 0;
+    unsigned int matches_minus = 0;
 
     // + motif
     parse_segments(tts_args.plus_parser,

@@ -234,12 +234,12 @@ void search_triplex(motif_t& tfo_motif,
                           seqan::getMotif(tfo_motif),
                           strand,
                           guanines);
-            tpx_args.matches.push_back(std::move(match));
+            tpx_args.matches.push_back(match);
         }
         tpx_args.tpx_motifs.clear();
 
-        auto key = std::make_pair<unsigned int, unsigned int>(seqan::getSequenceNo(tfo_motif),
-                                                              seqan::getSequenceNo(tts_motif));
+        auto key = std::make_pair(seqan::getSequenceNo(tfo_motif),
+                                  seqan::getSequenceNo(tts_motif));
         auto result_ptr = tpx_args.potentials.find(key);
         if (result_ptr != tpx_args.potentials.end()) {
             seqan::addCount(result_ptr->second, total, seqan::getMotif(tfo_motif));
@@ -250,8 +250,8 @@ void search_triplex(motif_t& tfo_motif,
                            seqan::length(seqan::host(tfo_motif)),
                            seqan::length(seqan::host(tts_motif)),
                            opts);
-            tpx_args.potentials.insert(std::make_pair<std::pair<unsigned int, unsigned int>,
-                                                      potential_t>(std::move(key), std::move(potential)));
+            tpx_args.potentials.insert(std::make_pair(std::move(key),
+                                                      std::move(potential)));
         }
     }
 }
@@ -283,8 +283,8 @@ SEQAN_OMP_PRAGMA(parallel)
 #endif
     make_triplex_parser(tpx_args, opts.max_interruptions);
 
-    uint64_t tfo_size = static_cast<uint64_t>(tfo_motifs.size());
-    uint64_t tts_size = static_cast<uint64_t>(tts_motifs.size());
+    auto tfo_size = static_cast<uint64_t>(tfo_motifs.size());
+    auto tts_size = static_cast<uint64_t>(tts_motifs.size());
 #if defined(_OPENMP)
     uint64_t chunk_size = std::min(tfo_size, tts_size);
 #endif

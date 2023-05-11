@@ -73,7 +73,7 @@ void reduce_motif_set(motif_set_t& output, motif_set_t& input)
         intervals[count].i2 = static_cast<interval_value_t>(seqan::endPosition(motif));
         intervals[count].cargo = vtx;
 
-        prop_map.insert(std::make_pair<graph_size_t, motif_t>(vtx, std::move(motif)));
+        prop_map.insert(std::make_pair(vtx, std::move(motif)));
 
         count++;
     }
@@ -114,9 +114,8 @@ void reduce_motif_set(motif_set_t& output, motif_set_t& input)
             merge(motif, prop_map.find(*vertex_it)->second);
         } else {
             auto& motif = prop_map.find(*vertex_it)->second;
-            graph_size_t motif_size = seqan::getProperty(components, *vertex_it);
-            comp_map.insert(std::make_pair<graph_size_t, motif_t>(std::move(motif_size),
-                                                                  std::move(motif)));
+            comp_map.insert(std::make_pair(seqan::getProperty(components, *vertex_it),
+                                           std::move(motif)));
         }
 
         vertex_it++;

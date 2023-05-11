@@ -3,7 +3,7 @@ BUILD=release
 INCLUDES+=-Iinclude
 
 CXX=g++
-CXXFLAGS+=-std=c++17 -Wall -Wextra -pedantic
+CXXFLAGS+=-std=c++17 -Wall -Wextra -Wpedantic
 
 cxxflags.serial=-flto -O3 -march=native -s
 cxxflags.profile=-flto -O3 -march=native -p -g
