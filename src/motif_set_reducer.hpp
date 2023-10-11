@@ -9,9 +9,9 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -27,21 +27,18 @@
 
 #include "triplex_definitions.hpp"
 
-template<typename pair_t>
-struct second_t
-{
-    typename pair_t::second_type operator()(const pair_t& p) const
-    {
-        return p.second;
-    }
+template <typename pair_t> struct second_t {
+  typename pair_t::second_type operator()(const pair_t &p) const {
+    return p.second;
+  }
 };
 
-template<typename map_t>
-second_t<typename map_t::value_type> second(__attribute__((unused)) const map_t& m)
-{
-    return second_t<typename map_t::value_type>();
+template <typename map_t>
+second_t<typename map_t::value_type> second(__attribute__((unused))
+                                            const map_t &m) {
+  return second_t<typename map_t::value_type>();
 }
 
-void reduce_motif_set(motif_set_t& output, motif_set_t& input);
+void reduce_motif_set(motif_set_t &output, motif_set_t &input);
 
 #endif

@@ -12,9 +12,10 @@
 //     * Redistributions in binary form must reproduce the above copyright
 //       notice, this list of conditions and the following disclaimer in the
 //       documentation and/or other materials provided with the distribution.
-//     * Neither the name of Fabian Buske or the University of Queensland nor 
-//       the names of its contributors may be used to endorse or promote products 
-//       derived from this software without specific prior written permission.
+//     * Neither the name of Fabian Buske or the University of Queensland nor
+//       the names of its contributors may be used to endorse or promote
+//       products derived from this software without specific prior written
+//       permission.
 //
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -35,79 +36,77 @@
 #ifndef SEQUENCE_POSITION_HPP
 #define SEQUENCE_POSITION_HPP
 
-namespace seqan
-{
+namespace seqan {
 
-template <typename TSeq, typename TPos>
-struct SeqPos
-{
-    TSeq seqnr;
-    TPos position;
+template <typename TSeq, typename TPos> struct SeqPos {
+  TSeq seqnr;
+  TPos position;
 
-    bool operator==(const SeqPos<TSeq, TPos>& b) const;
-    bool operator!=(const SeqPos<TSeq, TPos>& b) const;
-    bool operator<(const SeqPos<TSeq, TPos>& b) const;
-    bool operator>(const SeqPos<TSeq, TPos>& b) const;
+  bool operator==(const SeqPos<TSeq, TPos> &b) const;
+  bool operator!=(const SeqPos<TSeq, TPos> &b) const;
+  bool operator<(const SeqPos<TSeq, TPos> &b) const;
+  bool operator>(const SeqPos<TSeq, TPos> &b) const;
 
-    SeqPos(TSeq _seqnr, TPos _pos) : seqnr(_seqnr), position(_pos)
-    {}
+  SeqPos(TSeq _seqnr, TPos _pos) : seqnr(_seqnr), position(_pos) {}
 
-    SeqPos()
-    {}
+  SeqPos() {}
 
-    template <typename TSource>
-    inline SeqPos &
-    operator = (TSource const & source) {
-        assign(*this, source);
-        return *this;
-    }
+  template <typename TSource> inline SeqPos &operator=(TSource const &source) {
+    assign(*this, source);
+    return *this;
+  }
 };
 
 template <typename TSeq, typename TPos>
-bool SeqPos<TSeq, TPos>::operator==(const SeqPos<TSeq, TPos>& b) const {
-    if (seqnr != b.seqnr) return false;
-    if (position != b.position) return false;
-    return true;
-}
-
-template <typename TSeq, typename TPos>	
-bool SeqPos<TSeq, TPos>::operator!=(const SeqPos<TSeq, TPos>& b) const {
-    return !(*this == b);
-}
-
-template <typename TSeq, typename TPos>
-bool SeqPos<TSeq, TPos>::operator<(const SeqPos<TSeq, TPos>& b) const {
-    if (seqnr < b.seqnr) return true;
-    if (seqnr > b.seqnr) return false;
-    if (position < b.position) return true;
+bool SeqPos<TSeq, TPos>::operator==(const SeqPos<TSeq, TPos> &b) const {
+  if (seqnr != b.seqnr)
     return false;
+  if (position != b.position)
+    return false;
+  return true;
 }
 
 template <typename TSeq, typename TPos>
-bool SeqPos<TSeq, TPos>::operator>(const SeqPos<TSeq, TPos>& b) const {
-    return b<*this;
+bool SeqPos<TSeq, TPos>::operator!=(const SeqPos<TSeq, TPos> &b) const {
+  return !(*this == b);
 }
 
 template <typename TSeq, typename TPos>
-inline TSeq getSequenceNo(SeqPos<TSeq, TPos> & me){
-    return me.seqnr;
+bool SeqPos<TSeq, TPos>::operator<(const SeqPos<TSeq, TPos> &b) const {
+  if (seqnr < b.seqnr)
+    return true;
+  if (seqnr > b.seqnr)
+    return false;
+  if (position < b.position)
+    return true;
+  return false;
 }
 
 template <typename TSeq, typename TPos>
-inline TSeq getSequenceNo(SeqPos<TSeq, TPos> const & me){
-    return me.seqnr;
+bool SeqPos<TSeq, TPos>::operator>(const SeqPos<TSeq, TPos> &b) const {
+  return b < *this;
 }
 
 template <typename TSeq, typename TPos>
-inline TPos getPosition(SeqPos<TSeq, TPos> & me){
-    return me.position;
+inline TSeq getSequenceNo(SeqPos<TSeq, TPos> &me) {
+  return me.seqnr;
 }
 
 template <typename TSeq, typename TPos>
-inline TPos getPosition(SeqPos<TSeq, TPos> const & me){
-    return me.position;
+inline TSeq getSequenceNo(SeqPos<TSeq, TPos> const &me) {
+  return me.seqnr;
 }
 
+template <typename TSeq, typename TPos>
+inline TPos getPosition(SeqPos<TSeq, TPos> &me) {
+  return me.position;
 }
+
+template <typename TSeq, typename TPos>
+inline TPos getPosition(SeqPos<TSeq, TPos> const &me) {
+  return me.position;
+}
+
+} // namespace seqan
 
 #endif

@@ -9,9 +9,9 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -26,16 +26,14 @@
 
 #include <seqan/index.h>
 
-void filter_repeats(repeat_set_t& repeats,
-                    triplex_t& sequence,
+void filter_repeats(repeat_set_t &repeats, triplex_t &sequence,
                     unsigned int min_repeat_length,
-                    unsigned int max_repeat_period)
-{
-    seqan::findRepeats(repeats, sequence, min_repeat_length, max_repeat_period);
+                    unsigned int max_repeat_period) {
+  seqan::findRepeats(repeats, sequence, min_repeat_length, max_repeat_period);
 
-    for (auto& repeat : repeats) {
-        for (unsigned int i = repeat.beginPosition; i < repeat.endPosition; i++) {
-            sequence[i] = 'N';
-        }
+  for (auto &repeat : repeats) {
+    for (unsigned int i = repeat.beginPosition; i < repeat.endPosition; i++) {
+      sequence[i] = 'N';
     }
+  }
 }

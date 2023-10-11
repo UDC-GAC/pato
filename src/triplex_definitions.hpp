@@ -9,9 +9,9 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -25,28 +25,28 @@
 #ifndef TRIPLEX_DEFINITIONS_HPP
 #define TRIPLEX_DEFINITIONS_HPP
 
-#include <vector>
 #include <unordered_map>
+#include <vector>
 
-#include <seqan/map.h>
 #include <seqan/basic.h>
+#include <seqan/graph_types.h>
 #include <seqan/index.h>
+#include <seqan/map.h>
 #include <seqan/modifier.h>
 #include <seqan/sequence.h>
-#include <seqan/graph_types.h>
 
-#include "triplex_match.hpp"
-#include "triplex_pattern.hpp"
+#include "sequence_position.hpp"
 #include "triplex_alphabet.hpp"
 #include "triplex_functors.hpp"
-#include "sequence_position.hpp"
+#include "triplex_match.hpp"
+#include "triplex_pattern.hpp"
 
-struct pair_hash_t
-{
-    template <class T1, class T2>
-    std::size_t operator() (const std::pair<T1, T2>& pair) const {
-        return std::hash<T1>()(pair.first) ^ std::hash<T2>()(pair.second);
-    }
+// clang-format off
+struct pair_hash_t {
+  template <class T1, class T2>
+  std::size_t operator()(const std::pair<T1, T2> &pair) const {
+    return std::hash<T1>()(pair.first) ^ std::hash<T2>()(pair.second);
+  }
 };
 
 struct _tts;
@@ -100,5 +100,6 @@ typedef typename seqan::Host<motif_t>::Type host_t;
 typedef typename seqan::Infix<host_t>::Type host_infix_t;
 typedef typename seqan::Value<motif_t>::Type host_value_t;
 typedef seqan::ModifiedString<seqan::ModifiedString<host_infix_t, seqan::ModView<seqan::FunctorComplement<host_value_t>>>, seqan::ModReverse> mod_rev_t;
+// clang-format on
 
 #endif
